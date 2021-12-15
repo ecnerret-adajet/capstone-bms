@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Request extends Model
+class BloodRequest extends Model
 {
     use HasFactory;
 
@@ -36,6 +36,11 @@ class Request extends Model
     public function bloodPackNeed()
     {
         return $this->belongsTo(BloodPackNeed::class);
+    }
+
+    public function purpose()
+    {
+        return $this->belongsTo(Purpose::class);
     }
 
 }

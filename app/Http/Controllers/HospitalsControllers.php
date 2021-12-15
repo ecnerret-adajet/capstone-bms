@@ -3,14 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\RequestBlood;
-use App\BloodPackNeed;
-use App\UrgencyType;
-use App\RhGroup;
-use App\BloodType;
 
-class BloodRequestController extends Controller
+class HospitalsControllers extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -40,22 +34,7 @@ class BloodRequestController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'pateint_name' => 'required',
-            'blood_type_id' => 'required'
-        ]);
-
-        $bloodRequest = Auth::user()->bloodRequests($request->all());
-        
-        $bloodRequest->bloodType()->associate($request->blood_type_id);
-        $bloodRequest->rhGroup()->associate($request->rh_group_id);
-        $bloodRequest->rhGroup()->associate($request->rh_group_id);
-        $bloodRequest->purpose()->associate($request->purpose_id);
-        $bloodRequest->hospital()->associate($request->hospital_id);
-        $bloodRequest->urgency()->associate($request->urgeny_id);
-        $bloodRequest->save();
-
-        return $bloodRequest;
+        //
     }
 
     /**

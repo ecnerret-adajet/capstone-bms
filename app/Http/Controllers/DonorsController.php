@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\RequestBlood;
-use App\BloodPackNeed;
-use App\UrgencyType;
-use App\RhGroup;
+use App\Donor;
+use App\Gender;
 use App\BloodType;
+use App\RhGroup;
 
-class BloodRequestController extends Controller
+class DonorsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,21 +40,20 @@ class BloodRequestController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'pateint_name' => 'required',
-            'blood_type_id' => 'required'
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'phone_number' => 'required',
+            'gender_id' => 'required',
+            'birthdate' => 'required',
         ]);
 
-        $bloodRequest = Auth::user()->bloodRequests($request->all());
-        
-        $bloodRequest->bloodType()->associate($request->blood_type_id);
-        $bloodRequest->rhGroup()->associate($request->rh_group_id);
-        $bloodRequest->rhGroup()->associate($request->rh_group_id);
-        $bloodRequest->purpose()->associate($request->purpose_id);
-        $bloodRequest->hospital()->associate($request->hospital_id);
-        $bloodRequest->urgency()->associate($request->urgeny_id);
-        $bloodRequest->save();
+        $donor = Auth::user()->donors()->create($request->all());
+        $donor->gender()->associate($request->gender_id);
+        $donor->bloodType()->associate($request->blood_type_id);
+        $donor->rhGroup()->associate($request->rh_group_id);
+        $donor->save();
 
-        return $bloodRequest;
+        return $donor;
     }
 
     /**
