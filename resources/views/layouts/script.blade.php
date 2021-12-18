@@ -1,0 +1,56 @@
+<script src="{{ url('vendor/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('js/all.js') }}" defer></script>
+
+{{-- popover fixer --}}
+<script src="{{ url('js/bootstrap.min.js') }}" defer></script>
+
+<!-- Select2 -->
+<script src='{{ url('select2/dist/js/select2.min.js') }}'></script>
+<script>
+    /*---------- allow select2 in bootstrap modal -----------*/
+    $('.addScheduleModalSel2').select2({
+        dropdownParent: $('#addScheduleModal'),
+        width: '100%',
+        placeholder: "Select a record"
+
+    });
+    $('.updateScheduleModalSel2').select2({
+        dropdownParent: $('#updateScheduleModal'),
+        width: '100%',
+        placeholder: "Select a record"
+    });
+    /*-------------------------------------------------------*/
+
+    $('.sel2').select2({
+        width: '100%',
+        placeholder: "Select a record"
+    });
+</script>
+
+<script>
+function formatAMPM(time) {
+    var time = new Date('1995-12-30 ' + time);
+    return time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+}
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+function showErrorAlert(data) {
+    var errors = $.parseJSON(data.responseText);
+    var errList = '';
+    $.each(errors.errors, function (key, val) {
+        errList += '<li>' + val + '</li>';
+    });
+    return '<p>Error</b> ' + errors.message + '</p><ul class="small">' + errList + '</ul>';
+}
+</script>
+
+@yield('script')

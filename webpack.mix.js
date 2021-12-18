@@ -11,6 +11,21 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .vue()
-    .sass('resources/sass/app.scss', 'public/css');
+// mix.js('resources/js/app.js', 'public/js')
+//     .vue()
+//     .sass('resources/sass/app.scss', 'public/css');
+
+mix.styles([
+    'public/css/argon.css',
+    'public/css/style.css'
+], 'public/css/all.css')
+.js([
+	'resources/js/app.js',
+    // 'node_modules/popper.js/dist/popper.js.map',
+    // 'node_modules/bootstrap/dist/js/bootstrap.min.js',
+    // 'public/vendor/chart.js/dist/Chart.min.js',
+    // 'public/vendor/chart.js/dist/Chart.extension.js',
+    // 'public/js/argon.min.js'
+], 'public/js/all.js')
+.vue();
+// .browserSync('http://salesman.local');

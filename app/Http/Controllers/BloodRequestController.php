@@ -9,6 +9,7 @@ use App\BloodPackNeed;
 use App\UrgencyType;
 use App\RhGroup;
 use App\BloodType;
+use App\Http\Resources\BloodRequestResource;
 
 class BloodRequestController extends Controller
 {
@@ -19,7 +20,8 @@ class BloodRequestController extends Controller
      */
     public function index()
     {
-        //
+        $bloodRequests = BloodRequest::orderBy('id','desc')->all();
+        return BloodRequestResource::collect($bloodRequests);
     }
 
     /**
@@ -64,9 +66,9 @@ class BloodRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(BloodRequest $bloodRequest)
     {
-        //
+        return new BloodRequestResource($bloodRequest);
     }
 
     /**
