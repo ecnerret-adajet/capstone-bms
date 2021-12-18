@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +11,7 @@ use App\RhGroup;
 use App\BloodType;
 use App\Http\Resources\BloodRequestResource;
 
-class BloodRequestController extends Controller
+class BloodRequestsControllerApi extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,16 +19,6 @@ class BloodRequestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('bloodRequests.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -68,17 +58,6 @@ class BloodRequestController extends Controller
     public function show(BloodRequest $bloodRequest)
     {
         return new BloodRequestResource($bloodRequest);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
