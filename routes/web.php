@@ -28,3 +28,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 Route::get('/blood-requests', [BloodRequestController::class, 'index'])
     ->name('blood-requests')
     ->middleware('auth');
+
+Route::get('/blood-requests/create', [BloodRequestController::class, 'create'])
+    ->name('blood-requests.create')
+    ->middleware('auth');

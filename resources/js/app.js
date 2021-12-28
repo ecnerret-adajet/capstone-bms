@@ -26,6 +26,7 @@ Vue.component('home-index', require('./components/HomeIndex.vue').default);
 
 //blood requests
 Vue.component('bloodrequest-index', require('./components/bloodrequest/Index.vue').default);
+Vue.component('bloodrequest-create', require('./components/bloodrequest/Create.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -10,7 +10,8 @@ class BloodRequest extends Model
     use HasFactory;
 
     protected $fillable = [
-        'purpose'
+        'purpose',
+        'patient_name'
     ];
 
     public function user()

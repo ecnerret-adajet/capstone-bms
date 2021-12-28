@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class RhGroup extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name'
+    ];
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +11,7 @@ use App\RhGroup;
 use App\BloodType;
 use App\Http\Resources\BloodRequestResource;
 
-class BloodRequestController extends Controller
+class BloodRequestsApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,17 +20,7 @@ class BloodRequestController extends Controller
      */
     public function index()
     {
-        return view('bloodRequests.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('bloodRequests.create');
+        //
     }
 
     /**
@@ -50,9 +40,10 @@ class BloodRequestController extends Controller
         
         $bloodRequest->bloodType()->associate($request->blood_type_id);
         $bloodRequest->rhGroup()->associate($request->rh_group_id);
+        $bloodRequest->rhGroup()->associate($request->rh_group_id);
         $bloodRequest->purpose()->associate($request->purpose_id);
         $bloodRequest->hospital()->associate($request->hospital_id);
-        $bloodRequest->urgency()->associate($request->urgency_id);
+        $bloodRequest->urgency()->associate($request->urgeny_id);
         $bloodRequest->save();
 
         return $bloodRequest;
@@ -67,17 +58,6 @@ class BloodRequestController extends Controller
     public function show(BloodRequest $bloodRequest)
     {
         return new BloodRequestResource($bloodRequest);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
