@@ -18,14 +18,13 @@ class CreateBloodRequestsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('blood_type_id')->unsigned();
             $table->integer('urgency_type_id')->unsigned();
-            $table->integer('blood_pack_need_id')->nullable();
             $table->integer('rh_group_id')->unsigned();
             $table->integer('hospital_id')->unsigned();
             $table->string('patient_name');
             $table->string('diagnosies');
-            $table->string('hospital_no');
             $table->integer('bag_quantity')->unsigned();
             $table->integer('purpose_id')->unsigned();
+            $table->integer('status_id')->unsigned();
             $table->timestamps();
         });
     }

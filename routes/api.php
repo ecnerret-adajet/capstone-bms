@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\BloodTypesApiController;
 use App\Http\Controllers\Api\PurposesApiController;
 use App\Http\Controllers\Api\UrgenciesApiController;
 use App\Http\Controllers\Api\RhGroupsApiController;
+use App\Http\Controllers\Api\BloodRequestsApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,9 @@ use App\Http\Controllers\Api\RhGroupsApiController;
 // });
 
 Route::group(['middleware' => 'auth:api'], function() {
+
+    //Blood Requests
+    Route::get('/blood-requests', [BloodRequestsApiController::class, 'index']);
 
     //hospital api
     Route::get('/hospitals', [HospitalsApiController::class, 'index']);

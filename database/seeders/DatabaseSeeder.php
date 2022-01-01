@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             PurposeTableSeeder::class,
             RhGroupTableSeeder::class,
             UrgencyTableSeeder::class,
+            StatusTableSeeder::class,
+            UserTableSeeder::class,
         ]);
     }
 }

@@ -5,16 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BloodType extends Model
+class Status extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name'
     ];
-
-    public function bloodRequests()
-    {
-        return $this->hasMany(BloodRequeset::class);
-    }
 }

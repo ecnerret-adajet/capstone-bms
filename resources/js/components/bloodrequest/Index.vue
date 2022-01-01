@@ -36,11 +36,11 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr colspan="7">
+                                    <tr v-if="bloodRequests.length === 0"  colspan="7">
                                         <h3 class="text-muted text-center pt-3 pb-3">No Data</h3>
                                     </tr>
-                                    <!-- <tr v-for="(announcement, a) in filteredQueues" v-bind:key="a">
-                                        <td class="text-right">
+                                    <tr v-else v-for="(request, a) in bloodRequests" v-bind:key="a">
+                                        <!-- <td class="text-right">
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -51,13 +51,13 @@
                                                     <a class="dropdown-item" href="#deleteModal" data-toggle="modal" @click="getAnnouncementId(announcement.id)">Delete</a>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td>{{ announcement.id }}</td>
-                                        <td>{{ announcement.user.name }}</td>
-                                        <td>{{ announcement.message }}</td>
-                                        <td>{{ announcement.created_at }}</td>
-                                        <td>{{ announcement.updated_at }}</td>
-                                    </tr> -->
+                                        </td> -->
+                                        <td>{{ request.patient_name }}</td>
+                                        <td>{{ request.diagnosies }}</td>
+                                        <td>{{ request.bag_quantity }}</td>
+                                        <!-- <td>{{ request.created_at }}</td>
+                                        <td>{{ request.updated_at }}</td> -->
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -85,10 +85,38 @@
 
 <script>
 export default {
+
+    data() {
+        return {
+            errors: [],
+            bloodRequests: [],
+            keywords: '',
+            currentPage: 0,
+            itemsPerPage: 10,
+        }
+    },
+
+    mounted() {
+        this.getBloodRequests()
+    },
+
     computed: {
         createLink(){
             return window.location.origin+'/blood-requests/create';
         },
+    },
+
+    methods: {
+        getBloodRequests() {
+            axios.get('/api/blood-requests')
+                .then(response => {
+                    this.bloodRequests = response.data;
+                    console.log('check blood request: ', this.bloodRequests)
+                })
+                .catch(error => {
+                    this.errors = error.response.data.errors;
+                })
+        }
     }
 }
 </script>

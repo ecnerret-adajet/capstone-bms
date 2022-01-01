@@ -29,6 +29,12 @@ Route::get('/blood-requests', [BloodRequestController::class, 'index'])
     ->name('blood-requests')
     ->middleware('auth');
 
+Route::post('/blood-requests', [BloodRequestController::class, 'store'])
+    ->name('blood-requests.store')
+    ->middleware('auth');
+
 Route::get('/blood-requests/create', [BloodRequestController::class, 'create'])
     ->name('blood-requests.create')
     ->middleware('auth');
+
+

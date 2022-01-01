@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
-use App\RequestBlood;
-use App\BloodPackNeed;
-use App\UrgencyType;
-use App\RhGroup;
-use App\BloodType;
+use Illuminate\Support\Facades\Redirect;
+use App\Models\BloodType;
+use App\Models\RequestBlood;
+use App\Models\BloodPackNeed;
+use App\Models\Urgency;
+use App\Models\RhGroup;
 use App\Http\Resources\BloodRequestResource;
 
 class BloodRequestController extends Controller
@@ -39,23 +40,35 @@ class BloodRequestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        $this->validate($request,[
-            'pateint_name' => 'required',
-            'blood_type_id' => 'required'
+        Request::validate([
+            'patient_name' => ['required'],
         ]);
 
-        $bloodRequest = Auth::user()->bloodRequests($request->all());
+        $bloodRequest = Auth::user()->bloodRequests()->create([
+            'patient_name' => Request::get('patient_name'),
+            'diagnosies' => Request::get('diagnosies'),
+            'bag_quantity' => Request::get('bag_quantity'),
+        ]);
+
+        $bloodRequest->bloodType()->associate(Request::get('blood_type_id'));
+
+        $bloodRequest->rhGroup()->associate(Request::get('rh_group_id'));
         
-        $bloodRequest->bloodType()->associate($request->blood_type_id);
-        $bloodRequest->rhGroup()->associate($request->rh_group_id);
-        $bloodRequest->purpose()->associate($request->purpose_id);
-        $bloodRequest->hospital()->associate($request->hospital_id);
-        $bloodRequest->urgency()->associate($request->urgency_id);
+        $bloodRequest->purpose()->associate(Request::get('purpose_id'));
+        
+        $bloodRequest->hospital()->associate(Request::get('hospital_id'));
+        
+        $bloodRequest->urgencyType()->associate(Request::get('urgency_id'));
+        
         $bloodRequest->save();
 
-        return $bloodRequest;
+        // return $bloodRequest;
+
+        return ['redirect' => route('blood-requests')];
+
+        // return Redirect::route('blood-requests')->with('success','Successfully created.');
     }
 
     /**

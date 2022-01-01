@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\RequestBlood;
-use App\BloodPackNeed;
-use App\UrgencyType;
-use App\RhGroup;
-use App\BloodType;
+use App\Models\BloodRequest;
 use App\Http\Resources\BloodRequestResource;
 
 class BloodRequestsApiController extends Controller
@@ -20,7 +16,8 @@ class BloodRequestsApiController extends Controller
      */
     public function index()
     {
-        //
+        $bloodRequests = BloodRequest::orderBy('id','desc')->get();
+        return $bloodRequests;
     }
 
     /**
@@ -31,22 +28,7 @@ class BloodRequestsApiController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'pateint_name' => 'required',
-            'blood_type_id' => 'required'
-        ]);
-
-        $bloodRequest = Auth::user()->bloodRequests($request->all());
         
-        $bloodRequest->bloodType()->associate($request->blood_type_id);
-        $bloodRequest->rhGroup()->associate($request->rh_group_id);
-        $bloodRequest->rhGroup()->associate($request->rh_group_id);
-        $bloodRequest->purpose()->associate($request->purpose_id);
-        $bloodRequest->hospital()->associate($request->hospital_id);
-        $bloodRequest->urgency()->associate($request->urgeny_id);
-        $bloodRequest->save();
-
-        return $bloodRequest;
     }
 
     /**

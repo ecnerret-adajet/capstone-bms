@@ -5827,7 +5827,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       errors: [],
       bloodrequest: {
-        pateint_name: '',
+        patient_name: '',
         blood_type_id: '',
         rh_group_id: '',
         purpose_id: '',
@@ -5854,9 +5854,23 @@ __webpack_require__.r(__webpack_exports__);
     submitForm: function submitForm(data) {
       var _this = this;
 
-      axios.post("/api/blood-types", data).then(function (response) {
+      console.log(data);
+      console.log('blood type id ', data.blood_type_id);
+      axios.post("/blood-requests", {
+        patient_name: data.patient_name,
+        blood_type_id: data.blood_type_id,
+        rh_group_id: data.rh_group_id,
+        purpose_id: data.purpose_id,
+        hospital_id: data.hospital_id,
+        urgency_id: data.urgency_id,
+        diagnosies: data.diagnosies,
+        bag_quantity: data.bag_quantity
+      }).then(function (response) {
         console.log('response: ', response.status);
-        window.location.href = response.data.redirect;
+
+        if (response.status === 200) {
+          window.location.href = response.data.redirect;
+        }
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
       });
@@ -6009,9 +6023,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      errors: [],
+      bloodRequests: [],
+      keywords: '',
+      currentPage: 0,
+      itemsPerPage: 10
+    };
+  },
+  mounted: function mounted() {
+    this.getBloodRequests();
+  },
   computed: {
     createLink: function createLink() {
       return window.location.origin + '/blood-requests/create';
+    }
+  },
+  methods: {
+    getBloodRequests: function getBloodRequests() {
+      var _this = this;
+
+      axios.get('/api/blood-requests').then(function (response) {
+        _this.bloodRequests = response.data;
+        console.log('check blood request: ', _this.bloodRequests);
+      })["catch"](function (error) {
+        _this.errors = error.response.data.errors;
+      });
     }
   }
 });
@@ -30206,13 +30244,13 @@ var render = function () {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.bloodrequest.pateint_name,
-                              expression: "bloodrequest.pateint_name",
+                              value: _vm.bloodrequest.patient_name,
+                              expression: "bloodrequest.patient_name",
                             },
                           ],
                           staticClass: "form-control form-control-alternative",
                           attrs: { type: "text", id: "input-username" },
-                          domProps: { value: _vm.bloodrequest.pateint_name },
+                          domProps: { value: _vm.bloodrequest.patient_name },
                           on: {
                             input: function ($event) {
                               if ($event.target.composing) {
@@ -30220,7 +30258,7 @@ var render = function () {
                               }
                               _vm.$set(
                                 _vm.bloodrequest,
-                                "pateint_name",
+                                "patient_name",
                                 $event.target.value
                               )
                             },
@@ -30291,7 +30329,7 @@ var render = function () {
                             },
                           ],
                           staticClass: "form-control form-control-alternative",
-                          attrs: { type: "text", id: "input-username" },
+                          attrs: { type: "number", id: "input-username" },
                           domProps: { value: _vm.bloodrequest.bag_quantity },
                           on: {
                             input: function ($event) {
@@ -30707,7 +30745,41 @@ var render = function () {
               ]),
             ]),
             _vm._v(" "),
-            _vm._m(1),
+            _c("div", { staticClass: "table-responsive" }, [
+              _c(
+                "table",
+                { staticClass: "table align-items-center table-flush" },
+                [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    [
+                      _vm.bloodRequests.length === 0
+                        ? _c("tr", { attrs: { colspan: "7" } }, [
+                            _c(
+                              "h3",
+                              {
+                                staticClass: "text-muted text-center pt-3 pb-3",
+                              },
+                              [_vm._v("No Data")]
+                            ),
+                          ])
+                        : _vm._l(_vm.bloodRequests, function (request, a) {
+                            return _c("tr", { key: a }, [
+                              _c("td", [_vm._v(_vm._s(request.patient_name))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(request.diagnosies))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(request.bag_quantity))]),
+                            ])
+                          }),
+                    ],
+                    2
+                  ),
+                ]
+              ),
+            ]),
           ]),
         ]),
       ]),
@@ -30727,33 +30799,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "table-responsive" }, [
-      _c("table", { staticClass: "table align-items-center table-flush" }, [
-        _c("thead", { staticClass: "thead-light" }, [
-          _c("tr", [
-            _c("th", { attrs: { scope: "col" } }),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Blood Type")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Hospital")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Patient Name")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Diagnosies")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Bag Quantity")]),
-          ]),
-        ]),
+    return _c("thead", { staticClass: "thead-light" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }),
         _vm._v(" "),
-        _c("tbody", [
-          _c("tr", { attrs: { colspan: "7" } }, [
-            _c("h3", { staticClass: "text-muted text-center pt-3 pb-3" }, [
-              _vm._v("No Data"),
-            ]),
-          ]),
-        ]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Blood Type")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Hospital")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Patient Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Diagnosies")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Bag Quantity")]),
       ]),
     ])
   },

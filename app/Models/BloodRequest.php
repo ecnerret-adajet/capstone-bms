@@ -10,8 +10,9 @@ class BloodRequest extends Model
     use HasFactory;
 
     protected $fillable = [
-        'purpose',
-        'patient_name'
+        'patient_name',
+        'diagnosies',
+        'bag_quantity'
     ];
 
     public function user()
@@ -26,7 +27,7 @@ class BloodRequest extends Model
 
     public function urgencyType()
     {
-        return $this->belongsTo(UrgencyType::class);
+        return $this->belongsTo(Urgency::class);
     }
 
     public function rhGroup()
@@ -34,14 +35,19 @@ class BloodRequest extends Model
         return $this->belongsTo(RhGroup::class);
     }
 
-    public function bloodPackNeed()
-    {
-        return $this->belongsTo(BloodPackNeed::class);
-    }
-
     public function purpose()
     {
         return $this->belongsTo(Purpose::class);
+    }
+
+    public function hospital()
+    {
+        return $this->belongsTo(Hospital::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 
 }

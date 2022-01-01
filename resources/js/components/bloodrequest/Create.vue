@@ -22,15 +22,15 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-username">Patient Name</label>
-                                                <input type="text" id="input-username" class="form-control form-control-alternative" v-model="bloodrequest.pateint_name">
-                                                <!-- <span class="text-danger" v-if="errors.pateint_name">{{ errors.pateint_name[0] }}</span> -->
+                                                <input type="text" id="input-username" class="form-control form-control-alternative" v-model="bloodrequest.patient_name">
+                                                <!-- <span class="text-danger" v-if="errors.patient_name">{{ errors.patient_name[0] }}</span> -->
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-username">Diagnosies</label>
                                                 <input type="text" id="input-username" class="form-control form-control-alternative" v-model="bloodrequest.diagnosies">
-                                                <!-- <span class="text-danger" v-if="errors.pateint_name">{{ errors.pateint_name[0] }}</span> -->
+                                                <!-- <span class="text-danger" v-if="errors.patient_name">{{ errors.patient_name[0] }}</span> -->
                                             </div>
                                         </div>
                                     </div>
@@ -39,8 +39,8 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-username">Bag Quantiy</label>
-                                                <input type="text" id="input-username" class="form-control form-control-alternative" v-model="bloodrequest.bag_quantity">
-                                                <!-- <span class="text-danger" v-if="errors.pateint_name">{{ errors.pateint_name[0] }}</span> -->
+                                                <input type="number" id="input-username" class="form-control form-control-alternative" v-model="bloodrequest.bag_quantity">
+                                                <!-- <span class="text-danger" v-if="errors.patient_name">{{ errors.patient_name[0] }}</span> -->
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -125,7 +125,7 @@ export default {
         return{
             errors: [],
             bloodrequest:{
-                pateint_name: '',
+                patient_name: '',
                 blood_type_id: '',
                 rh_group_id: '',
                 purpose_id: '',
@@ -152,10 +152,23 @@ export default {
     methods:{
 
         submitForm(data) {
-            axios.post(`/api/blood-types`, data)
+            console.log(data)
+            console.log('blood type id ', data.blood_type_id,)
+            axios.post(`/blood-requests`, {
+                patient_name: data.patient_name,
+                blood_type_id: data.blood_type_id,
+                rh_group_id: data.rh_group_id,
+                purpose_id: data.purpose_id,
+                hospital_id: data.hospital_id,
+                urgency_id: data.urgency_id,
+                diagnosies: data.diagnosies,
+                bag_quantity: data.bag_quantity,
+            })
             .then(response => {
                 console.log('response: ', response.status)
-                 window.location.href = response.data.redirect;
+                if(response.status === 200) {
+                    window.location.href = response.data.redirect;
+                }
             })
             .catch(error => {
                 this.errors = error.response.data.errors;
