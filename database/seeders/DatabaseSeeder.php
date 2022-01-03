@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+        Model::unguard();
+
         $this->call([
             BloodTypeTableSeeder::class,
             GenderTableSeeder::class,
@@ -24,6 +26,11 @@ class DatabaseSeeder extends Seeder
             UrgencyTableSeeder::class,
             StatusTableSeeder::class,
             UserTableSeeder::class,
+            PermissionsTableSeeder::class,
+            RolesTableSeeder::class,
+            ConnectRelationshipsSeeder::class,
         ]);
+
+        Model::reguard();
     }
 }

@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\PurposesApiController;
 use App\Http\Controllers\Api\UrgenciesApiController;
 use App\Http\Controllers\Api\RhGroupsApiController;
 use App\Http\Controllers\Api\BloodRequestsApiController;
+use App\Http\Controllers\Api\DonorsApiController;
+use App\Http\Controllers\Api\GendersApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,8 @@ Route::group(['middleware' => 'auth:api'], function() {
 
     //Blood Requests
     Route::get('/blood-requests', [BloodRequestsApiController::class, 'index']);
+    Route::post('/blood-requests', [BloodRequestsApiController::class, 'store']);
+    Route::post('/blood-requests/{bloodRequest}', [BloodRequestsApiController::class, 'update']);
 
     //hospital api
     Route::get('/hospitals', [HospitalsApiController::class, 'index']);
@@ -44,5 +48,12 @@ Route::group(['middleware' => 'auth:api'], function() {
     
     //rh groups
     Route::get('/rh-groups', [RhGroupsApiController::class, 'index']);
+
+    // Donors 
+    Route::get('/donors', [DonorsApiController::class, 'index']);
+    Route::post('/donors', [DonorsApiController::class, 'store']);
+    Route::post('/donors/{donor}', [DonorsApiController::class, 'update']);
     
+    //gender
+    Route::get('/genders',[GendersApiController::class,'index']);
 });

@@ -25,6 +25,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{ url('/donors') }}">
+                <i class="ni ni-planet text-orange"></i>
+                <span class="nav-link-text">Donors</span>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="examples/map.html">
                 <i class="ni ni-pin-3 text-primary"></i>
                 <span class="nav-link-text">Blood Types</span>

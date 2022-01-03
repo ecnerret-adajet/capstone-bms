@@ -44,6 +44,8 @@ class BloodRequestController extends Controller
     {
         Request::validate([
             'patient_name' => ['required'],
+            'hostpita_id' => ['required'],
+            'blood_type_id' => ['required'],
         ]);
 
         $bloodRequest = Auth::user()->bloodRequests()->create([

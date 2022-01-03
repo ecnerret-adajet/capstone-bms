@@ -6022,6 +6022,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -30772,6 +30776,16 @@ var render = function () {
                               _c("td", [_vm._v(_vm._s(request.diagnosies))]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(request.bag_quantity))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(request.hospital.name))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(request.bloodType.name)),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(request.purpose.name))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(request.status.name))]),
                             ])
                           }),
                     ],
@@ -30801,19 +30815,19 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-light" }, [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Blood Type")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Hospital")]),
-        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Patient Name")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Diagnosies")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Bag Quantity")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Bag Quantiy")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Hospital")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Blood Type")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Purpose")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
       ]),
     ])
   },

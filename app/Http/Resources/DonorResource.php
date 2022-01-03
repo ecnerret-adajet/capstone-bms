@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BloodRequestResource extends JsonResource
+class DonorResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,15 +16,16 @@ class BloodRequestResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'patient_name' => $this->patient_name,
-            'diagnosies' => $this->diagnosies,
-            'bag_quantity' => $this->bag_quantity,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'phone_number' => $this->phone_number,
+            'gender' => $this->gender,
+            'birthdate' => $this->birthdate,
+            'address' => $this->address,
+            'height' => $this->height,
+            'weight' => $this->weight,
             'bloodType' => $this->bloodType,
-            'urgencyType' => $this->urgencyType,
             'rhGroup' => $this->rhGroup,
-            'purpose' => $this->purpose,
-            'hospital' => $this->hospital,
-            'status' => $this->status,
         ];
     }
 }
