@@ -11,6 +11,7 @@ use App\Models\RequestBlood;
 use App\Models\BloodPackNeed;
 use App\Models\Urgency;
 use App\Models\RhGroup;
+use App\Models\BloodRequest;
 use App\Http\Resources\BloodRequestResource;
 
 class BloodRequestsApiController extends Controller
@@ -23,7 +24,7 @@ class BloodRequestsApiController extends Controller
     public function index()
     {
         $bloodRequests = BloodRequest::orderBy('id','desc')->get();
-        return $bloodRequests;
+        return BloodRequestResource::collection($bloodRequests);
     }
 
     /**

@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BloodRequestController;
+use App\Http\Controllers\DonorsController;
+use App\Http\Controllers\HospitalsControllers;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,5 +39,33 @@ Route::post('/blood-requests', [BloodRequestController::class, 'store'])
 Route::get('/blood-requests/create', [BloodRequestController::class, 'create'])
     ->name('blood-requests.create')
     ->middleware('auth');
+
+// Donors
+Route::get('/donors', [DonorsController::class, 'index'])
+    ->name('donors')
+    ->middleware('auth');
+
+Route::get('/donors/create', [DonorsController::class, 'create'])
+    ->name('donors.create')
+    ->middleware('auth');
+
+// Hospitals
+Route::get('/hospitals', [HospitalsControllers::class, 'index'])
+    ->name('hospitals')
+    ->middleware('auth');
+
+Route::get('/hospitals/create', [HospitalsControllers::class, 'create'])
+    ->name('hospitals.create')
+    ->middleware('auth');
+
+// users
+Route::get('/users', [UsersController::class, 'index'])
+    ->name('users')
+    ->middleware('auth');
+
+Route::get('/users/create', [UsersController::class, 'index'])
+    ->name('users.create')
+    ->middleware('auth');
+
 
 

@@ -33,7 +33,7 @@ class Donor extends Model
         return $this->belongsTo(BloodType::class);
     }
 
-    public function rfGroup()
+    public function rhGroup()
     {
         return $this->belongsTo(RhGroup::class);
     }

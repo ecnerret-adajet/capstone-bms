@@ -53,4 +53,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Donor::class);
     }
+
+    public function hospitals()
+    {
+        return $this->hasMany(Hospital::class);
+    }
+
 }

@@ -31,6 +31,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{ url('/hospitals') }}">
+                <i class="ni ni-planet text-orange"></i>
+                <span class="nav-link-text">Hospitals</span>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="examples/map.html">
                 <i class="ni ni-pin-3 text-primary"></i>
                 <span class="nav-link-text">Blood Types</span>
@@ -42,6 +48,45 @@
                 <span class="nav-link-text">Notification</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/users') }}">
+                <i class="ni ni-planet text-orange"></i>
+                <span class="nav-link-text">Users</span>
+              </a>
+            </li>
+            <li>
+              <a data-toggle="collapse" href="#Report" class="collapsed" aria-expanded="false">
+                  <div class="nav-link">
+                      <i class="ni ni-ruler-pencil text-pink"></i>
+                      <span>Master Data</span>
+                  </div>
+              </a>
+              <div class="collapse space-left" id="Report" style="">
+                  <ul class="nav" style="list-style-type: none;">
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{ url('/blood-types') }}">
+                              <i class="ni ni-books text-gray"></i> Blood Type
+                          </a>
+                      </li>
+                      <li>
+                          <a class="nav-link" href="{{ url('/urgencies') }}">
+                              <i class="ni ni-collection text-indigo"></i> Urgency Types
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{ url('/rh-group') }}">
+                              <i class="ni ni-spaceship text-indigo"></i>RH Group
+                          </a>
+                      </li>
+
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{ url('/purposes') }}">
+                              <i class="ni ni-chart-pie-35 text-danger"></i> Purposes
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+          </li>
             {{-- <li class="nav-item">
               <a class="nav-link" href="examples/tables.html">
                 <i class="ni ni-bullet-list-67 text-default"></i>

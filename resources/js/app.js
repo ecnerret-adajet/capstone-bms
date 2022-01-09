@@ -28,6 +28,18 @@ Vue.component('home-index', require('./components/HomeIndex.vue').default);
 Vue.component('bloodrequest-index', require('./components/bloodrequest/Index.vue').default);
 Vue.component('bloodrequest-create', require('./components/bloodrequest/Create.vue').default);
 
+// donor
+Vue.component('donor-index', require('./components/donor/Index.vue').default);
+Vue.component('donor-create', require('./components/donor/Create.vue').default);
+
+//hospital
+Vue.component('hospital-index', require('./components/hospital/Index.vue').default);
+Vue.component('hospital-create', require('./components/hospital/Create.vue').default);
+
+//user
+Vue.component('user-index', require('./components/user/Index.vue').default);
+Vue.component('user-create', require('./components/user/Create.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

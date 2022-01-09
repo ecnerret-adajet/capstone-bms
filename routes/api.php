@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 
     //hospital api
     Route::get('/hospitals', [HospitalsApiController::class, 'index']);
+    Route::post('/hospitals',[HospitalsApiController::class,'store']);
     
     //blood types
     Route::get('/blood-types', [BloodTypesApiController::class, 'index']);

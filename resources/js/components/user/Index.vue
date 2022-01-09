@@ -10,7 +10,7 @@
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h3 class="mb-0">Donors</h3>
+                                    <h3 class="mb-0">Users</h3>
                                 </div>
                                 <div class="col text-right">
                                     <a :href="createLink" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#addModal">Add New</a>
@@ -26,20 +26,16 @@
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">Phone Number</th>
-                                    <th scope="col">Gender</th>
-                                    <th scope="col">Blood type</th>
-                                    <th scope="col">address</th>
-                                    <th scope="col">RH Group</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">User</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-if="donors.length === 0"  colspan="7">
+                                    <tr v-if="users.length === 0"  colspan="7">
                                         <h3 class="text-muted text-center pt-3 pb-3">No Data</h3>
                                     </tr>
-                                    <tr v-else v-for="(donor, a) in donors" v-bind:key="a">
+                                    <tr v-else v-for="(user, a) in users" v-bind:key="a">
                                         <!-- <td class="text-right">
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
@@ -52,13 +48,9 @@
                                                 </div>
                                             </div>
                                         </td> -->
-                                        <td>{{ donor.first_name }}</td>
-                                        <td>{{ donor.last_name }}</td>
-                                        <td>{{ donor.phone_number }}</td>
-                                        <td>{{ donor.gender ? donor.gender.name : 'N/A' }}</td>
-                                        <td>{{ donor.bloodType ? donor.bloodType.name : 'N/A' }}</td>
-                                        <td>{{ donor.address }}</td>
-                                        <td>{{ donor.rhGroup ? donor.rhGroup.name : 'N/A' }}</td>
+                                        <td>{{ user.hospital_name }}</td>
+                                        <td>{{ user.address }}</td>
+                                        <td>{{ user.user.name }}</td>
                                         <!-- <td>{{ request.created_at }}</td>
                                         <td>{{ request.updated_at }}</td> -->
                                     </tr>
@@ -93,7 +85,7 @@ export default {
     data() {
         return {
             errors: [],
-            donors: [],
+            users: [],
             keywords: '',
             currentPage: 0,
             itemsPerPage: 10,
@@ -101,21 +93,20 @@ export default {
     },
 
     mounted() {
-        this.getDonors()
+        this.getUsers()
     },
 
     computed: {
         createLink(){
-            return window.location.origin+'/donors/create';
+            return window.location.origin+'/users/create';
         },
     },
 
     methods: {
-        getDonors() {
-            axios.get('/api/donors')
+        getUsers() {
+            axios.get('/api/users')
                 .then(response => {
-                    this.donors = response.data.data;
-                    console.log('check blood request: ', this.donors)
+                    this.users = response.data.data;
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;

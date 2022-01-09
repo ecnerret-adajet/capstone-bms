@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\Donor;
 use App\Http\Resources\DonorResource;
+use App\Models\Donor;
 
 class DonorsApiController extends Controller
 {
@@ -19,7 +19,7 @@ class DonorsApiController extends Controller
     public function index()
     {
         $donors = Donor::orderBy('id','desc')->get();
-        return $donors;
+        return DonorResource::collection($donors);
     }
 
     /**

@@ -15,7 +15,7 @@ class GendersApiController extends Controller
      */
     public function index()
     {
-        $genders = Gender::order('id','desc')->get();
+        $genders = Gender::orderBy('id','desc')->get();
         return $genders;
     }
 

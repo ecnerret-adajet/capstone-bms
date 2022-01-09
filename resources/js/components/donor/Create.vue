@@ -23,7 +23,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-username">First Name</label>
                                                 <input type="text" id="input-username" class="form-control form-control-alternative" v-model="donor.first_name">
-                                                <span class="text-danger" v-if="errors.first_name">{{ errors.first_name[0] }}</span>
+                                                <!-- <span class="text-danger" v-if="errors.first_name">{{ errors.first_name[0] }}</span> -->
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -47,7 +47,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label" for="role">Gender</label>
                                                 <select class="form-control" v-model="donor.gender_id">
-                                                    <option v-for="(gender,b) in genders" v-bind:key="b" :value="gender.id"> {{ gender.name }}</option>
+                                                    <option v-for="(gender,g) in genders" v-bind:key="g" :value="gender.id"> {{ gender.name }}</option>
                                                 </select>
                                                 <!-- <span class="text-danger" v-if="errors.purpose_id  ">{{ errors.purpose_id[0] }}</span> -->
                                             </div>
@@ -149,7 +149,7 @@ export default {
                 rh_group_id: '',
             },
             genders: [],
-            bloodTypes: [],
+            bloodtypes: [],
             rhgroups: [],
         }
     },
@@ -163,7 +163,7 @@ export default {
 
         submitForm(data) {
             console.log(data)
-            axios.post(`/donors`, data)
+            axios.post(`/api/donors`, data)
             .then(response => {
                 console.log('response: ', response.status)
                 if(response.status === 200) {

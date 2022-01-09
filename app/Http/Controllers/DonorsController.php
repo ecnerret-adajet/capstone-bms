@@ -18,7 +18,7 @@ class DonorsController extends Controller
      */
     public function index()
     {
-        //
+        return view('donors.index');
     }
 
     /**
@@ -28,7 +28,7 @@ class DonorsController extends Controller
      */
     public function create()
     {
-        //
+        return view('donors.create');
     }
 
     /**

@@ -55,10 +55,10 @@
                                         <td>{{ request.patient_name }}</td>
                                         <td>{{ request.diagnosies }}</td>
                                         <td>{{ request.bag_quantity }}</td>
-                                        <td>{{ request.hospital.name }}</td>
-                                        <td>{{ request.bloodType.name }}</td>
-                                        <td>{{ request.purpose.name }}</td>
-                                        <td>{{ request.status.name }}</td>
+                                        <td>{{ request.hospital ? request.hospital.hospital_name : 'N/A' }}</td>
+                                        <td>{{ request.hospital ? request.bloodType.name : 'N/A' }}</td>
+                                        <td>{{ request.purpose ? request.purpose.name : 'N/A' }}</td>
+                                        <td>{{ request.status ? request.status.name : 'N/A' }}</td>
                                         <!-- <td>{{ request.created_at }}</td>
                                         <td>{{ request.updated_at }}</td> -->
                                     </tr>
@@ -114,7 +114,7 @@ export default {
         getBloodRequests() {
             axios.get('/api/blood-requests')
                 .then(response => {
-                    this.bloodRequests = response.data;
+                    this.bloodRequests = response.data.data;
                     console.log('check blood request: ', this.bloodRequests)
                 })
                 .catch(error => {
