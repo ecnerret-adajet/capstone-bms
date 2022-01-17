@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\RhGroupsApiController;
 use App\Http\Controllers\Api\BloodRequestsApiController;
 use App\Http\Controllers\Api\DonorsApiController;
 use App\Http\Controllers\Api\GendersApiController;
+use App\Http\Controllers\Api\UsersApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/blood-requests', [BloodRequestsApiController::class, 'index']);
     Route::post('/blood-requests', [BloodRequestsApiController::class, 'store']);
     Route::post('/blood-requests/{bloodRequest}', [BloodRequestsApiController::class, 'update']);
+    Route::post('/blood-requests/approval/{bloodRequest}', [BloodRequestsApiController::class, 'approval']);
 
     //hospital api
     Route::get('/hospitals', [HospitalsApiController::class, 'index']);
@@ -57,4 +59,8 @@ Route::group(['middleware' => 'auth:api'], function() {
     
     //gender
     Route::get('/genders',[GendersApiController::class,'index']);
+    
+    // users 
+    Route::get('/users',[UsersApiController::class,'index']);
+
 });

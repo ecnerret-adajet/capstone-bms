@@ -27,6 +27,7 @@ Vue.component('home-index', require('./components/HomeIndex.vue').default);
 //blood requests
 Vue.component('bloodrequest-index', require('./components/bloodrequest/Index.vue').default);
 Vue.component('bloodrequest-create', require('./components/bloodrequest/Create.vue').default);
+Vue.component('bloodrequest-approval', require('./components/bloodrequest/Approval.vue').default);
 
 // donor
 Vue.component('donor-index', require('./components/donor/Index.vue').default);

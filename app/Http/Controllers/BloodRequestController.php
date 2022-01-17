@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\BloodType;
-use App\Models\RequestBlood;
+use App\Models\BloodRequest;
 use App\Models\BloodPackNeed;
 use App\Models\Urgency;
 use App\Models\RhGroup;
@@ -82,6 +82,12 @@ class BloodRequestController extends Controller
     public function show(BloodRequest $bloodRequest)
     {
         return new BloodRequestResource($bloodRequest);
+    }
+
+    // Approve or disapprove blood request
+    public function showRequestApproval(BloodRequest $bloodRequest)
+    {
+        return view('bloodRequests.approval',compact('bloodRequest'));
     }
 
     /**

@@ -27,8 +27,8 @@
                                 <thead class="thead-light">
                                 <tr>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Address</th>
-                                    <th scope="col">User</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Role</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -48,9 +48,9 @@
                                                 </div>
                                             </div>
                                         </td> -->
-                                        <td>{{ user.hospital_name }}</td>
-                                        <td>{{ user.address }}</td>
-                                        <td>{{ user.user.name }}</td>
+                                        <td>{{ user.name }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ user.roles }}</td>
                                         <!-- <td>{{ request.created_at }}</td>
                                         <td>{{ request.updated_at }}</td> -->
                                     </tr>

@@ -39,6 +39,10 @@ Route::post('/blood-requests', [BloodRequestController::class, 'store'])
 Route::get('/blood-requests/create', [BloodRequestController::class, 'create'])
     ->name('blood-requests.create')
     ->middleware('auth');
+    
+Route::get('/blood-requests/show-approval/{bloodRequest}', [BloodRequestController::class, 'showRequestApproval'])
+    ->name('blood-requests.show-approval')
+    ->middleware('auth');
 
 // Donors
 Route::get('/donors', [DonorsController::class, 'index'])

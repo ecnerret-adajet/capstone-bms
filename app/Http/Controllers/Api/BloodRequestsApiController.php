@@ -109,6 +109,19 @@ class BloodRequestsApiController extends Controller
         return ['redirect' => route('blood-requests')];
     }
 
+    // process approval or disapprove 
+    public function approval(BloodRequest $bloodRequest)
+    {
+        Request::validate([
+            'status_id' => ['required'],
+        ]);
+
+        $bloodRequest->status_id = Request::get('status_id');
+        $bloodRequest->save();
+
+        return ['redirect' => route('blood-requests')];
+    }
+
     /**
      * Remove the specified resource from storage.
      *

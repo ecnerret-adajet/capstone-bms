@@ -33,6 +33,7 @@
                                     <th scope="col">Blood Type</th>
                                     <th scope="col">Purpose</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -59,6 +60,19 @@
                                         <td>{{ request.hospital ? request.bloodType.name : 'N/A' }}</td>
                                         <td>{{ request.purpose ? request.purpose.name : 'N/A' }}</td>
                                         <td>{{ request.status ? request.status.name : 'N/A' }}</td>
+                                        <td>
+                                            <a :href="`/blood-requests/show-approval/${ request.id }`" class="btn btn-primary btn-sm"> Approve </a>
+                                            <!-- <div class="dropdown">
+                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                    <a class="dropdown-item" href="#approveModal" data-toggle="modal">Approve</a>
+                                                    <a class="dropdown-item" href="#disapproveModal" data-toggle="modal">Disapprove</a>
+                                                </div>
+                                            </div> -->
+                                        </td>
                                         <!-- <td>{{ request.created_at }}</td>
                                         <td>{{ request.updated_at }}</td> -->
                                     </tr>
@@ -84,6 +98,37 @@
                 </div>
             </div>
         </div>
+
+
+         <!-- Approve Modal-->
+            <div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!-- <input type="hidden" v-model="user_id"> -->
+                            <h5 class="modal-title" id="exampleModalLabel">Approve Schedule</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        Are you sure you want to approve this Schedule?
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-dismiss='modal'>Close</button>
+                            <button class="btn btn-primary" @click="confirmRequest(request, 1)">Approve</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
     </div>
 </template>
 
@@ -111,6 +156,11 @@ export default {
     },
 
     methods: {
+
+        confirmRequest(request, status) {
+            console.log('request dialog')
+        },
+
         getBloodRequests() {
             axios.get('/api/blood-requests')
                 .then(response => {

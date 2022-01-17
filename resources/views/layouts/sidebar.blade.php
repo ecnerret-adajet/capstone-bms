@@ -42,19 +42,19 @@
                 <span class="nav-link-text">Blood Types</span>
               </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link" href="examples/profile.html">
                 <i class="ni ni-single-02 text-yellow"></i>
                 <span class="nav-link-text">Notification</span>
               </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/users') }}">
                 <i class="ni ni-planet text-orange"></i>
                 <span class="nav-link-text">Users</span>
               </a>
             </li>
-            <li>
+            {{-- <li>
               <a data-toggle="collapse" href="#Report" class="collapsed" aria-expanded="false">
                   <div class="nav-link">
                       <i class="ni ni-ruler-pencil text-pink"></i>
@@ -86,7 +86,7 @@
                       </li>
                   </ul>
               </div>
-          </li>
+          </li> --}}
             {{-- <li class="nav-item">
               <a class="nav-link" href="examples/tables.html">
                 <i class="ni ni-bullet-list-67 text-default"></i>
