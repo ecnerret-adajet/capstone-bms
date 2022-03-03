@@ -71,5 +71,10 @@ Route::get('/users/create', [UsersController::class, 'index'])
     ->name('users.create')
     ->middleware('auth');
 
+// role
+Route::get('/roles', [UsersController::class, 'roles'])
+    ->name('roles')
+    ->middleware('auth');
+
 
 
