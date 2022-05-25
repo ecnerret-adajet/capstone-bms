@@ -67,7 +67,7 @@ Route::get('/users', [UsersController::class, 'index'])
     ->name('users')
     ->middleware('auth');
 
-Route::get('/users/create', [UsersController::class, 'index'])
+Route::get('/users/create', [UsersController::class, 'create'])
     ->name('users.create')
     ->middleware('auth');
 

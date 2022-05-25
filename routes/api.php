@@ -62,5 +62,9 @@ Route::group(['middleware' => 'auth:api'], function() {
     
     // users 
     Route::get('/users',[UsersApiController::class,'index']);
+    Route::post('/users',[UsersApiController::class,'store']);
+
+    // users 
+    Route::get('/roles',[UsersApiController::class,'roles']);
 
 });

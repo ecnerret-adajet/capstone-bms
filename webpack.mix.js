@@ -30,4 +30,7 @@ mix.styles([
     'public/js/argon.js'
 ], 'public/js/all.js')
 .vue();
+// .browserSync({
+//     proxy: 'http://127.0.0.1:8000'
+// });
 // .browserSync('http://salesman.local');
