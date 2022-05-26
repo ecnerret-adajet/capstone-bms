@@ -29,8 +29,8 @@ mix.styles([
     // 'public/vendor/chart.js/dist/Chart.extension.js',
     'public/js/argon.js'
 ], 'public/js/all.js')
-.vue();
-// .browserSync({
-//     proxy: 'http://127.0.0.1:8000'
-// });
+.vue()
+.browserSync({
+    proxy: 'http://127.0.0.1:8000'
+});
 // .browserSync('http://salesman.local');

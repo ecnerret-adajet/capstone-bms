@@ -62,9 +62,9 @@ class DonorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Donor $donor)
     {
-        //
+        return $donor;
     }
 
     /**
@@ -73,9 +73,9 @@ class DonorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Donor $donor)
     {
-        //
+        return view('donors.edit', $donor);
     }
 
     /**
@@ -85,9 +85,23 @@ class DonorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Donor $donor)
     {
-        //
+        $this->validate($request,[
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'phone_number' => 'required',
+            'gender_id' => 'required',
+            'birthdate' => 'required',
+        ]);
+
+        $donor->update(Request::all());
+        $donor->gender()->associate($request->gender_id);
+        $donor->bloodType()->associate($request->blood_type_id);
+        $donor->rhGroup()->associate($request->rh_group_id);
+        $donor->save();
+
+        return $donor;
     }
 
     /**
@@ -96,8 +110,9 @@ class DonorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Donor $donor)
     {
-        //
+        $donor->delete();
+        return $donor;
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Resources\DonorResource;
 use App\Models\Donor;
+use App\Models\User;
 
 class DonorsApiController extends Controller
 {
@@ -49,7 +50,15 @@ class DonorsApiController extends Controller
             'gender_id' => ['required'],
         ]);
 
-        $donor = Auth::user()->donors()->create(Request::all());
+        // $user = User::create([
+        //     'name' => $request->first_name.' '.$request->last_name,
+        //     'email' => $request->email,
+        //     'password' => bcrypt($request->password),
+        // ]);
+
+        // $user->syncRoles($request->role_id);
+
+        $donor = Auth::user()->donors()->create(Request::all());       
         $donor->gender()->associate(Request::get('gender_id'));
         $donor->bloodType()->associate(Request::get('blood_type_id'));
         $donor->rhGroup()->associate(Request::get('rh_group_id'));

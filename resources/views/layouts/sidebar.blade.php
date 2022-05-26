@@ -12,48 +12,64 @@
         <div class="collapse navbar-collapse" id="sidenav-collapse-main">
           <!-- Nav items -->
           <ul class="navbar-nav">
+            @role('administrator')
             <li class="nav-item">
               <a class="nav-link active" href="{{ url('/') }}">
                 <i class="ni ni-tv-2 text-primary"></i>
                 <span class="nav-link-text">Dashboard</span>
               </a>
             </li>
+            @endrole
+
+            @role('administrator|requestor')
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/blood-requests') }}">
                 <i class="ni ni-planet text-orange"></i>
                 <span class="nav-link-text">Request</span>
               </a>
             </li>
+            @endrole
+
+            @role('administrator|donor')
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/donors') }}">
                 <i class="ni ni-planet text-orange"></i>
                 <span class="nav-link-text">Donors</span>
               </a>
             </li>
+            @endlevel
+
+            @role('administrator')
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/hospitals') }}">
                 <i class="ni ni-planet text-orange"></i>
                 <span class="nav-link-text">Hospitals</span>
               </a>
             </li>
-            <li class="nav-item">
+            @endrole
+
+            @role('administrator')
+            {{-- <li class="nav-item">
               <a class="nav-link" href="examples/map.html">
                 <i class="ni ni-pin-3 text-primary"></i>
                 <span class="nav-link-text">Blood Types</span>
               </a>
-            </li>
+            </li> --}}
+
             {{-- <li class="nav-item">
               <a class="nav-link" href="examples/profile.html">
                 <i class="ni ni-single-02 text-yellow"></i>
                 <span class="nav-link-text">Notification</span>
               </a>
             </li> --}}
+            
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/users') }}">
                 <i class="ni ni-planet text-orange"></i>
                 <span class="nav-link-text">Users</span>
               </a>
             </li>
+            @endrole
             {{-- <li>
               <a data-toggle="collapse" href="#Report" class="collapsed" aria-expanded="false">
                   <div class="nav-link">

@@ -12,7 +12,8 @@ class Hospital extends Model
     protected $fillable = [
         'hospital_name',
         'address',
-        'hospital_id'
+        'hospital_id',
+        'user_id'
     ];
 
     public function user()

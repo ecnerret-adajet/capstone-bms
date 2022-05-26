@@ -33,7 +33,7 @@
                                     <th scope="col">Blood Type</th>
                                     <th scope="col">Purpose</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col"></th>
+                                    <th scope="col" v-if="isAuthorized(1)"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -60,7 +60,7 @@
                                         <td>{{ request.hospital ? request.bloodType.name : 'N/A' }}</td>
                                         <td>{{ request.purpose ? request.purpose.name : 'N/A' }}</td>
                                         <td>{{ request.status ? request.status.name : 'N/A' }}</td>
-                                        <td>
+                                        <td v-if="isAuthorized(1)">
                                             <a :href="`/blood-requests/show-approval/${ request.id }`" class="btn btn-primary btn-sm"> Approve </a>
                                             <!-- <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
@@ -135,6 +135,8 @@
 <script>
 export default {
 
+    props:['roles'],
+
     data() {
         return {
             errors: [],
@@ -156,6 +158,16 @@ export default {
     },
 
     methods: {
+
+        isAuthorized(id) {
+            if(this.roles) {
+                if(this.roles.includes(id)) {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        },
 
         confirmRequest(request, status) {
             console.log('request dialog')

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Hospital;
+use App\Models\User;
 use App\Http\Resources\HospitalResource;
 
 class HospitalsApiController extends Controller
@@ -32,14 +33,31 @@ class HospitalsApiController extends Controller
     {
         Request::validate([
             'hospital_name' => ['required'],
-            'address' => ['required']
+            'address' => ['required'],
+            'name' => 'required',
+            'email' => 'required',
         ]);
 
-        $hospital = Auth::user()->hospitals()->create(Request::all());
-        $hospital->bloodType()->associate(Request::get('hospital_id'));
-        $hospital->rhGroup()->associate(Request::get('rh_group_id'));
-        $hospital->gender()->associate(Request::get('gender_id'));
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        $user->syncRoles($request->role_id);
+
+
+        $hospital = new Hospital;
+        $hospital->create(Request::all());
+        $hospital->user_id = $user->id;
         $hospital->save();
+
+
+        // $hospital->bloodType()->associate(Request::get('hospital_id'));
+        // $hospital->rhGroup()->associate(Request::get('rh_group_id'));
+        // $hospital->gender()->associate(Request::get('gender_id'));
+
+
 
         return ['redirect' => route('hospitals')];
     }

@@ -16,6 +16,7 @@ class Donor extends Model
         'birthdate',
         'height',
         'weight',
+        'user_id',
     ];
 
     public function user()
