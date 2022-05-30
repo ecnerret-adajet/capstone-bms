@@ -31,9 +31,13 @@ Route::group(['middleware' => 'auth:api'], function() {
 
     //Blood Requests
     Route::get('/blood-requests', [BloodRequestsApiController::class, 'index']);
+    Route::get('/blood-requests/profile', [BloodRequestsApiController::class, 'requestorProfile']);
     Route::post('/blood-requests', [BloodRequestsApiController::class, 'store']);
     Route::post('/blood-requests/{bloodRequest}', [BloodRequestsApiController::class, 'update']);
     Route::post('/blood-requests/approval/{bloodRequest}', [BloodRequestsApiController::class, 'approval']);
+    Route::get('/blood-requests/total-approved', [BloodRequestsApiController::class, 'totalApprovedBags']);
+    Route::get('/blood-requests/total-approved-req', [BloodRequestsApiController::class, 'totalApprovedRequest']);
+    Route::get('/blood-requests/total-pending-req', [BloodRequestsApiController::class, 'totalPending']);
 
     //hospital api
     Route::get('/hospitals', [HospitalsApiController::class, 'index']);
@@ -54,6 +58,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 
     // Donors 
     Route::get('/donors', [DonorsApiController::class, 'index']);
+    Route::get('/donors-profile', [DonorsApiController::class, 'donorProfile']);
     Route::post('/donors', [DonorsApiController::class, 'store']);
     Route::post('/donors/{donor}', [DonorsApiController::class, 'update']);
     

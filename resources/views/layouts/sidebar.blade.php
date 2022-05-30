@@ -21,11 +21,20 @@
             </li>
             @endrole
 
-            @role('administrator|requestor')
+            @role('administrator')
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/blood-requests') }}">
                 <i class="ni ni-planet text-orange"></i>
-                <span class="nav-link-text">Request</span>
+                <span class="nav-link-text">Blood Requests</span>
+              </a>
+            </li>
+            @endrole
+
+            @role('requestor')
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/blood-requests/profile') }}">
+                <i class="ni ni-planet text-orange"></i>
+                <span class="nav-link-text">Requestor Profile</span>
               </a>
             </li>
             @endrole
@@ -35,6 +44,14 @@
               <a class="nav-link" href="{{ url('/donors') }}">
                 <i class="ni ni-planet text-orange"></i>
                 <span class="nav-link-text">Donors</span>
+              </a>
+            </li>
+            @endlevel
+            @role('administrator|donor')
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/donors/profile') }}">
+                <i class="ni ni-planet text-orange"></i>
+                <span class="nav-link-text">Donor Profile</span>
               </a>
             </li>
             @endlevel

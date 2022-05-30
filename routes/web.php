@@ -31,6 +31,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 Route::get('/blood-requests', [BloodRequestController::class, 'index'])
     ->name('blood-requests')
     ->middleware('auth');
+    
+Route::get('/blood-requests/profile', [BloodRequestController::class, 'profile'])
+    ->name('blood-requests.profile')
+    ->middleware('auth');
 
 Route::post('/blood-requests', [BloodRequestController::class, 'store'])
     ->name('blood-requests.store')
@@ -47,6 +51,10 @@ Route::get('/blood-requests/show-approval/{bloodRequest}', [BloodRequestControll
 // Donors
 Route::get('/donors', [DonorsController::class, 'index'])
     ->name('donors')
+    ->middleware('auth');
+
+Route::get('/donors/profile', [DonorsController::class, 'donor'])
+    ->name('donors.profile')
     ->middleware('auth');
 
 Route::get('/donors/create', [DonorsController::class, 'create'])

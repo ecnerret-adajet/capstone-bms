@@ -2,87 +2,8 @@
   <div>
         <div class="header bg-red pb-6 pt-5 pt-md-6"></div>
         <div class="container-fluid mt--7">
-
-        <div class="header-body">
-         
-          <!-- Card stats -->
-          <div class="row">
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Blood Bags</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ totalApprovedBags }}</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                        <i class="ni ni-active-40"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Approved</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ totalApprovedRequests }}</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Pending</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ totalPending }}</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            
-
-          </div>
-        </div>
-
             <!-- Table -->
-            <div class="row ">
+            <div class="row mt-5">
                 <div class="col">
                     <div class="card shadow">
 
@@ -91,9 +12,9 @@
                                 <div class="col">
                                     <h3 class="mb-0">Blood Requests</h3>
                                 </div>
-                                <!-- <div class="col text-right">
+                                <div class="col text-right">
                                     <a :href="createLink" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#addModal">Add New</a>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -112,7 +33,6 @@
                                     <th scope="col">Blood Type</th>
                                     <th scope="col">Purpose</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col" v-if="isAuthorized(1)"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -139,19 +59,6 @@
                                         <td>{{ request.hospital ? request.bloodType.name : 'N/A' }}</td>
                                         <td>{{ request.purpose ? request.purpose.name : 'N/A' }}</td>
                                         <td>{{ request.status ? request.status.name : 'N/A' }}</td>
-                                        <td v-if="isAuthorized(1)">
-                                            <a :href="`/blood-requests/show-approval/${ request.id }`" class="btn btn-primary btn-sm"> Approve </a>
-                                            <!-- <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="#approveModal" data-toggle="modal">Approve</a>
-                                                    <a class="dropdown-item" href="#disapproveModal" data-toggle="modal">Disapprove</a>
-                                                </div>
-                                            </div> -->
-                                        </td>
                                         <!-- <td>{{ request.created_at }}</td>
                                         <td>{{ request.updated_at }}</td> -->
                                     </tr>
@@ -218,9 +125,6 @@ export default {
 
     data() {
         return {
-            totalApprovedBags: 0,
-            totalApprovedRequests: 0,
-            totalPending: 0,
             errors: [],
             bloodRequests: [],
             keywords: '',
@@ -231,9 +135,6 @@ export default {
 
     mounted() {
         this.getBloodRequests()
-        this.getApprovedBags()
-        this.getApprovedRequests()
-        this.getTotalPending()
     },
 
     computed: {
@@ -243,8 +144,6 @@ export default {
     },
 
     methods: {
-
-
 
         isAuthorized(id) {
             if(this.roles) {
@@ -261,7 +160,7 @@ export default {
         },
 
         getBloodRequests() {
-            axios.get('/api/blood-requests')
+            axios.get('/api/blood-requests/profile')
                 .then(response => {
                     this.bloodRequests = response.data.data;
                     console.log('check blood request: ', this.bloodRequests)
@@ -269,40 +168,7 @@ export default {
                 .catch(error => {
                     this.errors = error.response.data.errors;
                 })
-        },
-
-        getApprovedBags() {
-            axios.get('/api/blood-requests/total-approved')
-                .then(response => {
-                    console.log('check blood total: ', response.data)
-                    this.totalApprovedBags = response.data;
-                })
-                .catch(error => {
-                    this.errors = error.response.data.errors;
-                })
-        },
-
-        getApprovedRequests() {
-            axios.get('/api/blood-requests/total-approved-req')
-                .then(response => {
-                    this.totalApprovedRequests = response.data;
-                })
-                .catch(error => {
-                    this.errors = error.response.data.errors;
-                })
-        },
-
-        getTotalPending() {
-            axios.get('/api/blood-requests/total-pending-req')
-                .then(response => {
-                    this.totalPending = response.data;
-                })
-                .catch(error => {
-                    this.errors = error.response.data.errors;
-                })
-        },
-
-
+        }
     }
 }
 </script>

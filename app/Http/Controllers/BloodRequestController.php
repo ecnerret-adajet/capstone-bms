@@ -24,6 +24,11 @@ class BloodRequestController extends Controller
         return view('bloodRequests.index');
     }
 
+    public function profile()
+    {
+        return view('bloodRequests.profile');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

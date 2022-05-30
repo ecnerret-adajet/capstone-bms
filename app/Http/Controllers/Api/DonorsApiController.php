@@ -24,6 +24,27 @@ class DonorsApiController extends Controller
     }
 
     /**
+     * Show own create donors profile
+     */
+    public function donorRequests()
+    {
+        $donors = Donor::orderBy('id','desc')
+                ->where('user_id', Auth::user()->id)
+                ->get();
+                
+        return DonorResource::collection($donors);
+    }
+
+    /**
+     * Show profile donor
+     */
+    public function donorProfile()
+    {
+        $donor = Donor::where('user_id', Auth::user()->id)->first();
+        return new DonorResource($donor);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

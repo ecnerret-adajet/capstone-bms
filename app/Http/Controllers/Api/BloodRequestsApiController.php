@@ -27,6 +27,41 @@ class BloodRequestsApiController extends Controller
         return BloodRequestResource::collection($bloodRequests);
     }
 
+    public function totalApprovedBags()
+    {
+        $bloodRequests = collect(BloodRequest::select('bag_quantity')
+                    ->where('status_id',1)
+                    ->pluck('bag_quantity'))
+                    ->sum();
+
+        return $bloodRequests;
+    }
+
+    public function totalApprovedRequest()
+    {
+        $bloodRequests = BloodRequest::where('status_id',1)->count();
+        return $bloodRequests;
+    }
+
+
+    public function totalPending()
+    {
+        $bloodRequests = BloodRequest::where('status_id', 0)->count();
+        return $bloodRequests;
+    }
+
+    /**
+     * View on request profile
+     */
+    public function requestorProfile()
+    {
+        $bloodRequests = BloodRequest::orderBy('id','desc')
+                    ->where('user_id',Auth::user()->id)
+                    ->get();
+                    
+        return BloodRequestResource::collection($bloodRequests);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

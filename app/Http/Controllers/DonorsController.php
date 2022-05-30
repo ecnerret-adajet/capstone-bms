@@ -22,6 +22,14 @@ class DonorsController extends Controller
     }
 
     /**
+     * Show donors profile page
+     */
+    public function donor()
+    {
+        return view('donors.profile');
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
