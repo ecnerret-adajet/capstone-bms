@@ -179,7 +179,7 @@ export default {
             axios.get('/api/hospitals')
             .then(response => { 
                 console.log('check hospitals: ', response.data)
-                this.hospitals = response.data;
+                this.hospitals = response.data.data;
             })
             .catch(error => { 
                 this.errors = error.response.data.errors;

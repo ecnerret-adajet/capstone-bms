@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BloodRequestController;
+use App\Http\Controllers\BloodBankController;
 use App\Http\Controllers\DonorsController;
 use App\Http\Controllers\HospitalsControllers;
 use App\Http\Controllers\UsersController;
@@ -26,6 +27,16 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 ->name('home');
+
+// blood bank inventory
+Route::get('/blood-banks', [BloodBankController::class, 'index'])
+    ->name('blood-banks')
+    ->middleware('auth');
+
+Route::get('/blood-banks/create', [BloodBankController::class, 'create'])
+    ->name('blood-banks.create')
+    ->middleware('auth');
+
 
 // blood request
 Route::get('/blood-requests', [BloodRequestController::class, 'index'])

@@ -28,6 +28,13 @@
                 <span class="nav-link-text">Blood Requests</span>
               </a>
             </li>
+      
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/blood-banks') }}">
+                <i class="ni ni-planet text-orange"></i>
+                <span class="nav-link-text">Blood Inventory</span>
+              </a>
+            </li>
             @endrole
 
             @role('requestor')

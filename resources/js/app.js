@@ -24,6 +24,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 //home
 Vue.component('home-index', require('./components/HomeIndex.vue').default);
 
+//blood bank
+Vue.component('bloodbank-index', require('./components/bloodbank/Index.vue').default);
+Vue.component('bloodbank-create', require('./components/bloodbank/Create.vue').default);
+
 //blood requests
 Vue.component('bloodrequest-index', require('./components/bloodrequest/Index.vue').default);
 Vue.component('bloodrequest-profile', require('./components/bloodrequest/Profile.vue').default);

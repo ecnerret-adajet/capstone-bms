@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\BloodRequestsApiController;
 use App\Http\Controllers\Api\DonorsApiController;
 use App\Http\Controllers\Api\GendersApiController;
 use App\Http\Controllers\Api\UsersApiController;
+use App\Http\Controllers\Api\BloodBankApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,10 +40,15 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/blood-requests/total-approved-req', [BloodRequestsApiController::class, 'totalApprovedRequest']);
     Route::get('/blood-requests/total-pending-req', [BloodRequestsApiController::class, 'totalPending']);
 
+    // blood bank
+    Route::get('/blood-banks',[BloodBankApiController::class,'index']);
+    Route::post('/blood-banks',[BloodBankApiController::class,'store']);
+    Route::get('/blood-banks/count',[BloodBankApiController::class,'bloodTypeCount']);
+
     //hospital api
     Route::get('/hospitals', [HospitalsApiController::class, 'index']);
     Route::post('/hospitals',[HospitalsApiController::class,'store']);
-    
+ 
     //blood types
     Route::get('/blood-types', [BloodTypesApiController::class, 'index']);
     Route::post('/blood-types', [BloodTypesApiController::class, 'store']);
