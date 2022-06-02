@@ -80,6 +80,7 @@ class BloodRequestsApiController extends Controller
             'patient_name' => Request::get('patient_name'),
             'diagnosies' => Request::get('diagnosies'),
             'bag_quantity' => Request::get('bag_quantity'),
+            'attachment' => Request::file('attachment') ? Request::file('attachment')->store('documents') : null,
         ]);
 
         $bloodRequest->bloodType()->associate(Request::get('blood_type_id'));

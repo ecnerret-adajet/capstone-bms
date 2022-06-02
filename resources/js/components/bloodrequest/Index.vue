@@ -140,7 +140,13 @@
                                         <td>{{ request.purpose ? request.purpose.name : 'N/A' }}</td>
                                         <td>{{ request.status ? request.status.name : 'N/A' }}</td>
                                         <td v-if="isAuthorized(1)">
+                                            <span v-if="!request.status">
                                             <a :href="`/blood-requests/show-approval/${ request.id }`" class="btn btn-primary btn-sm"> Approve </a>
+                                            </span>
+                                            <span v-else>
+                                            <a disabled href="#" class="text-uppercase btn btn-secondary btn-sm"> {{ request.status.name }} </a>
+                                            </span>
+                                           
                                             <!-- <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

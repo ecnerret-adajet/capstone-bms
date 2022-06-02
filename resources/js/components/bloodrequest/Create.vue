@@ -96,6 +96,18 @@
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="role">Document Upload</label>
+                                                <input type="file" :class="{' is-invalid':errors.attachment,}" @input="bloodrequest.attachment = $event.target.files[0]" class="form-control" id="customFile"/>
+
+                                                <!-- <input type="text" id="input-username" class="form-control form-control-alternative" v-model="bloodrequest.diagnosies"> -->
+                                                <!-- <span class="text-danger" v-if="errors.rh_group_id  ">{{ errors.rh_group_id[0] }}</span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                 </div>
                                 <div class="pl-lg-4">
@@ -133,6 +145,7 @@ export default {
                 urgency_id: '',
                 diagnosies: '',
                 bag_quantity: '',
+                attachment: ''
             },
             hospitals: [],
             bloodtypes: [],
@@ -163,6 +176,7 @@ export default {
                 urgency_id: data.urgency_id,
                 diagnosies: data.diagnosies,
                 bag_quantity: data.bag_quantity,
+                attachment: data.attachment,
             })
             .then(response => {
                 console.log('response: ', response.status)

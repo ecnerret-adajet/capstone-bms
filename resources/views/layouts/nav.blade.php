@@ -33,9 +33,20 @@
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{-- <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="ni ni-bell-55"></i>
+            </a> --}}
+            <a class="nav-link" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                <i class="ni ni-user-run"></i>
+                <span>{{ __('Logout') }}</span>
+
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                  style="display: none;">
+                @csrf
+            </form>
             <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
               <!-- Dropdown header -->
               <div class="px-3 py-3">

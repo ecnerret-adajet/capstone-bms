@@ -12,7 +12,8 @@ class BloodRequest extends Model
     protected $fillable = [
         'patient_name',
         'diagnosies',
-        'bag_quantity'
+        'bag_quantity',
+        'attachment',
     ];
 
     public function user()

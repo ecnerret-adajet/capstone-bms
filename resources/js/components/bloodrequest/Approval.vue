@@ -23,7 +23,7 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="role">Approval Status</label>
-                                                <select class="form-control" v-model="bloodrequest.status_id">
+                                                <select class="form-control" v-model="bloodrequestDetails.status_id">
                                                     <option v-for="(approval,b) in approvals" v-bind:key="b" :value="approval.id"> {{ approval.name }}</option>
                                                 </select>
                                                 <!-- <span class="text-danger" v-if="errors.rh_group_id  ">{{ errors.rh_group_id[0] }}</span> -->
@@ -36,7 +36,7 @@
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="text">
-                                            <button @click="submitForm(bloodrequest)" type="button" class="btn btn-primary mt-4">Save</button>
+                                            <button @click="submitForm(bloodrequestDetails)" type="button" class="btn btn-primary mt-4">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +72,8 @@ export default {
                 }
             ],
             errors: [],
-            bloodrequest:{
+            bloodrequestDetails:{
+                id: this.bloodrequest.id,
                 status_id: '',
             },
         }
