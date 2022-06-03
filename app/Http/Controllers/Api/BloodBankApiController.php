@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\BloodType;
 use App\Models\BloodBank;
+use App\Models\BloodBankSummary;
 
 class BloodBankApiController extends Controller
 {
@@ -27,11 +28,14 @@ class BloodBankApiController extends Controller
 
     public function bloodTypeCount()
     {
+        // $bloodBankSummary = BloodBankSummary::all();
+        // return $bloodBankSummary;
+
         return array(
-            'a' => BloodBank::where('blood_type_id',1)->sum('quantity'),
-            'b' => BloodBank::where('blood_type_id',2)->sum('quantity'),
-            'ab' => BloodBank::where('blood_type_id',3)->sum('quantity'),
-            'o' => BloodBank::where('blood_type_id',4)->sum('quantity'),
+            'a' => BloodBankSummary::where('blood_type_id',1)->sum('quantity'),
+            'b' => BloodBankSummary::where('blood_type_id',2)->sum('quantity'),
+            'ab' => BloodBankSummary::where('blood_type_id',3)->sum('quantity'),
+            'o' => BloodBankSummary::where('blood_type_id',4)->sum('quantity'),
         );
     }
 
@@ -53,6 +57,15 @@ class BloodBankApiController extends Controller
         $bloodBank->bloodType()->associate(Request::get('blood_type_id'));
 
         $bloodBank->save();
+
+        // check if has blood type on summary
+        $checkAvailability = BloodBankSummary::where('blood_type_id', Request::get('blood_type_id'))->first();
+
+        BloodBankSummary::updateOrCreate([
+            'blood_type_id' => Request::get('blood_type_id')
+        ],[
+            'quantity' => $checkAvailability ? (int) $checkAvailability->quantity + Request::get('quantity') : Request::get('quantity')
+        ]);
 
         return ['redirect' => route('blood-banks')];
     }

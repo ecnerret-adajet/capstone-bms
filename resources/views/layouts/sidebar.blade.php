@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse" id="sidenav-collapse-main">
           <!-- Nav items -->
           <ul class="navbar-nav">
-            @role('administrator')
+            @role('administrator|requestor')
             <li class="nav-item">
               <a class="nav-link active" href="{{ url('/') }}">
                 <i class="ni ni-tv-2 text-primary"></i>
@@ -21,17 +21,19 @@
             </li>
             @endrole
 
-            @role('administrator')
+            @role('administrator|requestor')
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/blood-requests') }}">
-                <i class="ni ni-planet text-orange"></i>
+                <i class="ni ni-support-16  text-red"></i>
                 <span class="nav-link-text">Blood Requests</span>
               </a>
             </li>
+            @endrole
       
+            @role('administrator|requestor')
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/blood-banks') }}">
-                <i class="ni ni-planet text-orange"></i>
+                <i class="ni ni-app  text-red"></i>
                 <span class="nav-link-text">Blood Inventory</span>
               </a>
             </li>
@@ -40,7 +42,7 @@
             @role('requestor')
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/blood-requests/profile') }}">
-                <i class="ni ni-planet text-orange"></i>
+                <i class="ni ni-circle-08  text-orange"></i>
                 <span class="nav-link-text">Requestor Profile</span>
               </a>
             </li>
@@ -49,15 +51,15 @@
             @role('administrator|donor')
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/donors') }}">
-                <i class="ni ni-planet text-orange"></i>
+                <i class="ni ni-favourite-28  text-red"></i>
                 <span class="nav-link-text">Donors</span>
               </a>
             </li>
             @endlevel
-            @role('administrator|donor')
+            @role('donor')
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/donors/profile') }}">
-                <i class="ni ni-planet text-orange"></i>
+                <i class="ni ni-circle-08  text-blue"></i>
                 <span class="nav-link-text">Donor Profile</span>
               </a>
             </li>
@@ -66,7 +68,7 @@
             @role('administrator')
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/hospitals') }}">
-                <i class="ni ni-planet text-orange"></i>
+                <i class="ni ni-building  text-red"></i>
                 <span class="nav-link-text">Hospitals</span>
               </a>
             </li>
@@ -89,7 +91,7 @@
             
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/users') }}">
-                <i class="ni ni-planet text-orange"></i>
+                <i class="ni ni-circle-08  text-pink"></i>
                 <span class="nav-link-text">Users</span>
               </a>
             </li>

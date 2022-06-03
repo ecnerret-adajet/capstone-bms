@@ -12,6 +12,8 @@ use App\Models\BloodPackNeed;
 use App\Models\Urgency;
 use App\Models\RhGroup;
 use App\Models\BloodRequest;
+use App\Models\BloodBank;
+use App\Models\BloodBankSummary;
 use App\Http\Resources\BloodRequestResource;
 
 class BloodRequestsApiController extends Controller
@@ -23,8 +25,14 @@ class BloodRequestsApiController extends Controller
      */
     public function index()
     {
-        $bloodRequests = BloodRequest::orderBy('id','desc')->get();
-        return BloodRequestResource::collection($bloodRequests);
+        if (Auth::user()->hasRole('administrator')) { // you can pass an id or slug
+
+            $bloodRequests = BloodRequest::orderBy('id','desc')->get();
+            return BloodRequestResource::collection($bloodRequests);
+
+        }
+        $ownbloodRequests = BloodRequest::where('user_id',Auth::user()->id)->orderBy('id','desc')->get();
+        return BloodRequestResource::collection($ownbloodRequests);
     }
 
     public function totalApprovedBags()
@@ -39,15 +47,25 @@ class BloodRequestsApiController extends Controller
 
     public function totalApprovedRequest()
     {
-        $bloodRequests = BloodRequest::where('status_id',1)->count();
-        return $bloodRequests;
+        if (Auth::user()->hasRole('administrator')) { // you can pass an id or slug
+            $bloodRequests = BloodRequest::where('status_id',1)->count();
+            return $bloodRequests;
+        }
+
+        $ownbloodRequests = BloodRequest::where('status_id',1)->where('status_id',1)->count();
+        return $ownbloodRequests;
     }
 
 
     public function totalPending()
     {
-        $bloodRequests = BloodRequest::where('status_id', 0)->count();
-        return $bloodRequests;
+        if (Auth::user()->hasRole('administrator')) { // you can pass an id or slug
+            $bloodRequests = BloodRequest::where('status_id', 0)->count();
+            return $bloodRequests;
+        }
+
+        $ownbloodRequests = BloodRequest::where('status_id',1)->where('status_id', 0)->count();
+        return $ownbloodRequests;
     }
 
     /**
@@ -111,6 +129,11 @@ class BloodRequestsApiController extends Controller
         return new BloodRequestResource($bloodRequest);
     }
 
+    public function showBloodRequest(BloodRequest $bloodRequest)
+    {
+        return $bloodRequest;
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -154,6 +177,27 @@ class BloodRequestsApiController extends Controller
 
         $bloodRequest->status_id = Request::get('status_id');
         $bloodRequest->save();
+
+        if(Request::get('status_id') == 1) {
+            $checkAvailability = BloodBankSummary::where('blood_type_id', $bloodRequest->blood_type_id)->sum('quantity');
+
+            if($checkAvailability > $bloodRequest->bag_quantity) {
+
+                $getBloodInventory = BloodBankSummary::where('blood_type_id', $bloodRequest->blood_type_id)->first();
+
+                $bloodApproved = BloodBankSummary::where('blood_type_id', $bloodRequest->blood_type_id)->first();
+                $bloodApproved->quantity = (int) $getBloodInventory->quantity - (int) $bloodRequest->bag_quantity;
+                $bloodApproved->save();
+
+                          
+            } else {
+                Request::validate([
+                    'insufficient_quantity' => ['required'],
+                ],[
+                    'insufficient_quantity.required' => "Not enought blood inventory"
+                ]);
+            }
+        }
 
         return ['redirect' => route('blood-requests')];
     }

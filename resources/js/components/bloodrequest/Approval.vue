@@ -14,6 +14,18 @@
                             </div>
                         </div>
                         <div class="card-body">
+
+                            <div v-if="errors.insufficient_quantity" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <span class="alert-inner--icon"><i class="ni ni-support-16"></i></span>
+                            <span class="alert-inner--text">
+                                {{ errors.insufficient_quantity[0] }}
+                            </span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                            </button>
+                            </div>
+
+
                             <form>
                                 <h6 class="heading-small text-muted mb-4">Blood Requests Information</h6>
                                 <div class="pl-lg-4">
@@ -56,9 +68,7 @@ export default {
     components:{
         Multiselect
     },
-    props: {
-        bloodrequest: Object
-    },
+    props: ['bloodrequest'],
     data(){
         return{
             approvals: [
@@ -73,11 +83,11 @@ export default {
             ],
             errors: [],
             bloodrequestDetails:{
-                id: this.bloodrequest.id,
                 status_id: '',
             },
         }
     },
+
     mounted(){
         console.log('check blood reques: ', this.bloodrequest)
     },
@@ -85,17 +95,20 @@ export default {
     methods:{
 
         submitForm(data) {
-            axios.post(`/api/blood-requests/approval/${data.id}`, {
+            axios.post(`/api/blood-requests/approval/${this.bloodrequest}`, {
                 status_id: data.status_id,
             })
             .then(response => {
-                console.log('response: ', response.status)
+                console.log('response: ', response.data)
                 if(response.status === 200) {
                     window.location.href = response.data.redirect;
                 }
             })
             .catch(error => {
-                this.errors = error.response.data.errors;
+                if(error.response.status == 422) {
+                    this.errors = error.response.data.errors;
+                    console.log(this.errors)
+                }
             })
         },
 

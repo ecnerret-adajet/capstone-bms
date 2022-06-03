@@ -39,7 +39,8 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/blood-requests/total-approved', [BloodRequestsApiController::class, 'totalApprovedBags']);
     Route::get('/blood-requests/total-approved-req', [BloodRequestsApiController::class, 'totalApprovedRequest']);
     Route::get('/blood-requests/total-pending-req', [BloodRequestsApiController::class, 'totalPending']);
-
+    Route::get('/blood-requests/{bloodRequest}', [BloodRequestsApiController::class, 'showBloodRequest']);
+    
     // blood bank
     Route::get('/blood-banks',[BloodBankApiController::class,'index']);
     Route::post('/blood-banks',[BloodBankApiController::class,'store']);
