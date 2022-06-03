@@ -71,15 +71,24 @@ class DonorsApiController extends Controller
             'gender_id' => ['required'],
         ]);
 
-        // $user = User::create([
-        //     'name' => $request->first_name.' '.$request->last_name,
-        //     'email' => $request->email,
-        //     'password' => bcrypt($request->password),
-        // ]);
+        $user = User::create([
+            'name' =>  Request::get('first_name').' '.Request::get('last_name'),
+            'email' => Request::get('email'),
+            'password' => bcrypt(Request::get('password')),
+        ]);
 
-        // $user->syncRoles($request->role_id);
+        $user->syncRoles(Request::get('role_id'));
 
-        $donor = Auth::user()->donors()->create(Request::all());       
+        $donor = new Donor;       
+        // $donor->create(Request::all());
+        $donor->first_name = Request::get('first_name');
+        $donor->last_name = Request::get('last_name');
+        $donor->phone_number = Request::get('phone_number');
+        $donor->birthdate = Request::get('birthdate');
+        $donor->height = Request::get('height');
+        $donor->weight = Request::get('weight');
+        $donor->address = Request::get('address');
+        $donor->user_id = $user->id;
         $donor->gender()->associate(Request::get('gender_id'));
         $donor->bloodType()->associate(Request::get('blood_type_id'));
         $donor->rhGroup()->associate(Request::get('rh_group_id'));

@@ -101,9 +101,9 @@ class BloodRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(BloodRequest $bloodRequest)
     {
-        //
+        return view('bloodRequests.edit',compact('bloodRequest'));
     }
 
     /**

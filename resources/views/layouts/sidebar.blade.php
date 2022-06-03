@@ -21,6 +21,13 @@
             </li>
             @endrole
 
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/events') }}">
+                <i class="ni ni-calendar-grid-58 text-primary"></i>
+                <span class="nav-link-text">Events</span>
+              </a>
+            </li>
+
             @role('administrator|requestor')
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/blood-requests') }}">
@@ -48,7 +55,7 @@
             </li>
             @endrole
 
-            @role('administrator|donor')
+            @role('administrator')
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/donors') }}">
                 <i class="ni ni-favourite-28  text-red"></i>
@@ -89,12 +96,12 @@
               </a>
             </li> --}}
             
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link" href="{{ url('/users') }}">
                 <i class="ni ni-circle-08  text-pink"></i>
                 <span class="nav-link-text">Users</span>
               </a>
-            </li>
+            </li> --}}
             @endrole
             {{-- <li>
               <a data-toggle="collapse" href="#Report" class="collapsed" aria-expanded="false">

@@ -33,6 +33,7 @@ Vue.component('bloodrequest-index', require('./components/bloodrequest/Index.vue
 Vue.component('bloodrequest-profile', require('./components/bloodrequest/Profile.vue').default);
 Vue.component('bloodrequest-create', require('./components/bloodrequest/Create.vue').default);
 Vue.component('bloodrequest-approval', require('./components/bloodrequest/Approval.vue').default);
+Vue.component('bloodrequest-edit', require('./components/bloodrequest/Edit.vue').default);
 
 // donor
 Vue.component('donor-index', require('./components/donor/Index.vue').default);
@@ -42,6 +43,10 @@ Vue.component('donor-create', require('./components/donor/Create.vue').default);
 //hospital
 Vue.component('hospital-index', require('./components/hospital/Index.vue').default);
 Vue.component('hospital-create', require('./components/hospital/Create.vue').default);
+
+//events
+Vue.component('event-index', require('./components/events/Index.vue').default);
+Vue.component('event-create', require('./components/events/Create.vue').default);
 
 //user
 Vue.component('user-index', require('./components/user/Index.vue').default);

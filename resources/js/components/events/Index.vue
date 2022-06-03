@@ -10,10 +10,10 @@
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h3 class="mb-0">Hospitals</h3>
+                                    <h3 class="mb-0">Events</h3>
                                 </div>
                                 <div class="col text-right">
-                                    <a :href="createLink" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#addModal">Add New</a>
+                                    <a v-if="isAuthorized(1)" :href="createLink" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#addModal">Add New</a>
                                 </div>
                             </div>
                         </div>
@@ -26,18 +26,19 @@
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Address</th>
-                                    <th scope="col">User</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">End Date</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-if="hospitals.length === 0">
-                                        <td colspan="3">
-                                        <h3 class="text-muted text-center pt-3 pb-3">No Data</h3>
+                                    <tr v-if="events.length === 0">
+                                        <td colspan="4">
+                                            <h3 class="text-muted text-center pt-3 pb-3">No Data</h3>
                                         </td>
                                     </tr>
-                                    <tr v-else v-for="(hospital, a) in hospitals" v-bind:key="a">
+                                    <tr v-else v-for="(event, a) in events" v-bind:key="a">
                                         <!-- <td class="text-right">
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
@@ -50,9 +51,10 @@
                                                 </div>
                                             </div>
                                         </td> -->
-                                        <td>{{ hospital.hospital_name }}</td>
-                                        <td>{{ hospital.address }}</td>
-                                        <td>{{ hospital.user.name }}</td>
+                                        <td>{{ event.title }}</td>
+                                        <td>{{ event.description }}</td>
+                                        <td>{{ event.start_date }}</td>
+                                        <td>{{ event.end_date }}</td>
                                         <!-- <td>{{ request.created_at }}</td>
                                         <td>{{ request.updated_at }}</td> -->
                                     </tr>
@@ -84,10 +86,12 @@
 <script>
 export default {
 
+     props:['roles'],
+
     data() {
         return {
             errors: [],
-            hospitals: [],
+            events: [],
             keywords: '',
             currentPage: 0,
             itemsPerPage: 10,
@@ -95,20 +99,31 @@ export default {
     },
 
     mounted() {
-        this.getHospitals()
+        this.getEvents()
     },
 
     computed: {
         createLink(){
-            return window.location.origin+'/hospitals/create';
+            return window.location.origin+'/events/create';
         },
     },
 
     methods: {
-        getHospitals() {
-            axios.get('/api/hospitals')
+
+        isAuthorized(id) {
+            if(this.roles) {
+                if(this.roles.includes(id)) {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        },
+
+        getEvents() {
+            axios.get('/api/events')
                 .then(response => {
-                    this.hospitals = response.data.data;
+                    this.events = response.data;
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;

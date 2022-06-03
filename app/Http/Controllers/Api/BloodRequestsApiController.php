@@ -90,7 +90,7 @@ class BloodRequestsApiController extends Controller
     {
         Request::validate([
             'patient_name' => ['required'],
-            'hostpita_id' => ['required'],
+            'hospital_id' => ['required'],
             'blood_type_id' => ['required'],
         ]);
 
@@ -98,8 +98,16 @@ class BloodRequestsApiController extends Controller
             'patient_name' => Request::get('patient_name'),
             'diagnosies' => Request::get('diagnosies'),
             'bag_quantity' => Request::get('bag_quantity'),
-            'attachment' => Request::file('attachment') ? Request::file('attachment')->store('documents') : null,
+            // 'attachment' => Request::file('attachment') ? Request::file('attachment')->store('documents') : null,
         ]);
+
+        if(Request::hasFile('attachment')) {
+            $fileName = Auth::user()->id() . '_' . time() . '.'. Request::file('attachment')->extension();  
+            $type = Request::file('attachment')->getClientMimeType();
+            $size = Request::file('attachment')->getSize();
+
+            $bloodRequest->attachment = Request::file('attachment')->move(public_path('documents'), $fileName);
+        }
 
         $bloodRequest->bloodType()->associate(Request::get('blood_type_id'));
 
@@ -145,11 +153,15 @@ class BloodRequestsApiController extends Controller
     {
         Request::validate([
             'patient_name' => ['required'],
-            'hostpita_id' => ['required'],
             'blood_type_id' => ['required'],
+            'hospital_id' => ['required'],
         ]);
 
-        $bloodRequest->update(Request::all());
+        $bloodRequest->update([
+            'patient_name' => Request::get('patient_name'),
+            'diagnosies' => Request::get('diagnosies'),
+            'bag_quantity' => Request::get('bag_quantity'),
+        ]);
 
         $bloodRequest->bloodType()->associate(Request::get('blood_type_id'));
 
@@ -208,9 +220,10 @@ class BloodRequestsApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(BloodRequest $bloodRequest)
     {
-        //
+        $bloodRequest->delete();
+        return ['redirect' => route('blood-requests')];
     }
 
     /**

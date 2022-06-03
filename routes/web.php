@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BloodRequestController;
 use App\Http\Controllers\BloodBankController;
 use App\Http\Controllers\DonorsController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\HospitalsControllers;
 use App\Http\Controllers\UsersController;
 
@@ -54,6 +55,10 @@ Route::post('/blood-requests', [BloodRequestController::class, 'store'])
 Route::get('/blood-requests/create', [BloodRequestController::class, 'create'])
     ->name('blood-requests.create')
     ->middleware('auth');
+
+Route::get('/blood-requests/edit/{bloodRequest}', [BloodRequestController::class, 'edit'])
+    ->name('blood-requests.edit')
+    ->middleware('auth');
     
 Route::get('/blood-requests/show-approval/{bloodRequest}', [BloodRequestController::class, 'showRequestApproval'])
     ->name('blood-requests.show-approval')
@@ -79,6 +84,15 @@ Route::get('/hospitals', [HospitalsControllers::class, 'index'])
 
 Route::get('/hospitals/create', [HospitalsControllers::class, 'create'])
     ->name('hospitals.create')
+    ->middleware('auth');
+
+// Events
+Route::get('/events', [EventController::class, 'index'])
+    ->name('events')
+    ->middleware('auth');
+
+Route::get('/events/create', [EventController::class, 'create'])
+    ->name('events.create')
     ->middleware('auth');
 
 // users

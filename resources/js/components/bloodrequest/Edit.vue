@@ -9,7 +9,7 @@
                         <div class="card-header bg-white border-0">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Create Blood Requests</h3>
+                                    <h3 class="mb-0">Update Blood Requests</h3>
                                 </div>
                             </div>
                         </div>
@@ -96,18 +96,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="role">Document Upload</label>
-                                                <input type="file" :class="{' is-invalid':errors.attachment,}" @input="bloodrequest.attachment = $event.target.files[0]" class="form-control" id="customFile"/>
-
-                                                <!-- <input type="text" id="input-username" class="form-control form-control-alternative" v-model="bloodrequest.diagnosies"> -->
-                                                <!-- <span class="text-danger" v-if="errors.rh_group_id  ">{{ errors.rh_group_id[0] }}</span> -->
-                                            </div>
-                                        </div>
-                                    </div>
-
 
                                 </div>
                                 <div class="pl-lg-4">
@@ -133,20 +121,22 @@ export default {
     components:{
         Multiselect
     },
+    props: ['bloodrequest_id'],
     data(){
         return{
             errors: [],
-            bloodrequest:{
-                patient_name: '',
-                blood_type_id: '',
-                rh_group_id: '',
-                purpose_id: '',
-                hospital_id: '',
-                urgency_id: '',
-                diagnosies: '',
-                bag_quantity: '',
-                attachment: ''
-            },
+            bloodrequest:{},
+            // bloodrequest:{
+            //     patient_name: '',
+            //     blood_type_id: '',
+            //     rh_group_id: '',
+            //     purpose_id: '',
+            //     hospital_id: '',
+            //     urgency_id: '',
+            //     diagnosies: '',
+            //     bag_quantity: '',
+            //     attachment: ''
+            // },
             hospitals: [],
             bloodtypes: [],
             purposes: [],
@@ -155,6 +145,7 @@ export default {
         }
     },
     mounted(){
+        this.fetchBloodRequest();
         this.fetchHospitalsData();
         this.fetchBloodTypes();
         this.fetchPurposes();
@@ -164,10 +155,20 @@ export default {
 
     methods:{
 
+        fetchBloodRequest(){
+            axios.get(`/api/blood-requests/${this.bloodrequest_id}`)
+            .then(response => { 
+                this.bloodrequest = response.data.data;
+            })
+            .catch(error => { 
+                this.errors = error.response.data.errors;
+            })
+        },
+
         submitForm(data) {
             console.log(data)
             console.log('blood type id ', data.blood_type_id,)
-            axios.post(`/blood-requests`, {
+            axios.post(`/api/blood-requests/${this.bloodrequest_id}`, {
                 patient_name: data.patient_name,
                 blood_type_id: data.blood_type_id,
                 rh_group_id: data.rh_group_id,
@@ -176,10 +177,10 @@ export default {
                 urgency_id: data.urgency_id,
                 diagnosies: data.diagnosies,
                 bag_quantity: data.bag_quantity,
-                attachment: data.attachment,
+                // attachment: data.attachment,
             })
             .then(response => {
-                // console.log('response: ', response.status)
+                console.log('response: ', response.status)
                 if(response.status === 200) {
                     window.location.href = response.data.redirect;
                 }

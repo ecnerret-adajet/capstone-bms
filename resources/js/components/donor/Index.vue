@@ -36,8 +36,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-if="donors.length === 0"  colspan="7">
+                                    <tr v-if="donors.length === 0">
+                                        <td colspan="7">
                                         <h3 class="text-muted text-center pt-3 pb-3">No Data</h3>
+                                        </td>
                                     </tr>
                                     <tr v-else v-for="(donor, a) in donors" v-bind:key="a">
                                         <!-- <td class="text-right">

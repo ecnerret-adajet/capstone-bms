@@ -96,7 +96,7 @@
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="text">
-                                            <button @click="submitForm(user)" type="button" class="btn btn-primary mt-4">Save</button>
+                                            <button @click="submitForm(hospital)" type="button" class="btn btn-primary mt-4">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -138,7 +138,8 @@ export default {
     methods:{
 
         submitForm(data) {
-            axios.post(`/api/hospital`, data)
+            console.log('check data: ', data)
+            axios.post(`/api/hospitals`, data)
             .then(response => {
                 console.log('response: ', response.status)
                 if(response.status === 200) {

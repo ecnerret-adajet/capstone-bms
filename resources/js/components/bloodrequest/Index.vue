@@ -15,7 +15,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Approved</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ totalApprovedRequests }}</span>
+                      <span class="h1 font-weight-bold mb-0">{{ totalApprovedRequests }}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -24,8 +24,8 @@
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
+                    <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last month</span> -->
                   </p>
                 </div>
               </div>
@@ -38,7 +38,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Pending</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ totalPending }}</span>
+                      <span class="h1 font-weight-bold mb-0">{{ totalPending }}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -47,8 +47,8 @@
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
+                    <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                        <span class="text-nowrap">Since last month</span> -->
                   </p>
                 </div>
               </div>
@@ -90,6 +90,7 @@
                                     <th scope="col">Blood Type</th>
                                     <th scope="col">Purpose</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col"></th>
                                     <th scope="col" v-if="isAuthorized(1)"></th>
                                 </tr>
                                 </thead>
@@ -117,6 +118,10 @@
                                         <td>{{ request.hospital ? request.bloodType.name : 'N/A' }}</td>
                                         <td>{{ request.purpose ? request.purpose.name : 'N/A' }}</td>
                                         <td>{{ request.status ? request.status.name : 'Pending' }}</td>
+                                        <td>
+                                            <a :href="`/blood-requests/edit/${ request.id }`" class="btn btn-primary btn-sm"> Edit </a>
+                                            <button @click="removeRequest(request.id)" class="btn btn-danger btn-sm"> Delete </button>
+                                        </td>
                                         <td v-if="isAuthorized(1)">
                                             <span v-if="!request.status">
                                             <a :href="`/blood-requests/show-approval/${ request.id }`" class="btn btn-primary btn-sm"> For Approval </a>
@@ -228,7 +233,16 @@ export default {
 
     methods: {
 
+        removeRequest(id) {
 
+            axios.delete(`/api/blood-requests/delete/${id}`)
+            .then(response => {
+                if(response.status === 200) {
+                    window.location.href = response.data.redirect;
+                }
+            })
+
+        },
 
         isAuthorized(id) {
             if(this.roles) {

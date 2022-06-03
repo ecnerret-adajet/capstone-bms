@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\DonorsApiController;
 use App\Http\Controllers\Api\GendersApiController;
 use App\Http\Controllers\Api\UsersApiController;
 use App\Http\Controllers\Api\BloodBankApiController;
+use App\Http\Controllers\Api\EventApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,8 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/blood-requests/total-approved-req', [BloodRequestsApiController::class, 'totalApprovedRequest']);
     Route::get('/blood-requests/total-pending-req', [BloodRequestsApiController::class, 'totalPending']);
     Route::get('/blood-requests/{bloodRequest}', [BloodRequestsApiController::class, 'showBloodRequest']);
+    Route::get('/blood-requests/{bloodRequest}', [BloodRequestsApiController::class, 'show']);
+    Route::delete('/blood-requests/delete/{bloodRequest}', [BloodRequestsApiController::class, 'destroy']);
     
     // blood bank
     Route::get('/blood-banks',[BloodBankApiController::class,'index']);
@@ -49,6 +52,10 @@ Route::group(['middleware' => 'auth:api'], function() {
     //hospital api
     Route::get('/hospitals', [HospitalsApiController::class, 'index']);
     Route::post('/hospitals',[HospitalsApiController::class,'store']);
+
+    //hospital api
+    Route::get('/events', [EventApiController::class, 'index']);
+    Route::post('/events',[EventApiController::class,'store']);
  
     //blood types
     Route::get('/blood-types', [BloodTypesApiController::class, 'index']);

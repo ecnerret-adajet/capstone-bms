@@ -39,17 +39,18 @@ class HospitalsApiController extends Controller
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'name' =>  Request::get('name'),
+            'email' =>  Request::get('email'),
+            'password' => bcrypt(Request::get('password')),
         ]);
 
-        $user->syncRoles($request->role_id);
-
+        $user->syncRoles(Request::get('role_id'));
 
         $hospital = new Hospital;
-        $hospital->create(Request::all());
+        // $hospital->create(Request::all());
         $hospital->user_id = $user->id;
+        $hospital->hospital_name = Request::get('hospital_name');
+        $hospital->address = Request::get('address');
         $hospital->save();
 
 
