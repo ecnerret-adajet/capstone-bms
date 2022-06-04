@@ -18,7 +18,10 @@ class HospitalResource extends JsonResource
             'id' => $this->id,
             'hospital_name' => $this->hospital_name,
             'address' => $this->address,
-            'user' => $this->user ? $this->user : 'N/A'
+            'user' => $this->user ? $this->user : 'N/A',
+            'name' => $this->user ? $this->user->name : 'N/A',
+            'email' => $this->user ? $this->user->email : 'N/A',
+            'role_id' => $this->user ? $this->user->roles->pluck('id')[0] : null,
         ];
     }
 }

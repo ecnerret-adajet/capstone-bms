@@ -33,6 +33,7 @@
                                     <th scope="col">Blood type</th>
                                     <th scope="col">address</th>
                                     <th scope="col">RH Group</th>
+                                    <th scope="col"  v-if="isAuthorized(1)"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -61,6 +62,10 @@
                                         <td>{{ donor.bloodType ? donor.bloodType.name : 'N/A' }}</td>
                                         <td>{{ donor.address }}</td>
                                         <td>{{ donor.rhGroup ? donor.rhGroup.name : 'N/A' }}</td>
+                                        <td  v-if="isAuthorized(1)">
+                                             <a :href="`/donors/edit/${donor.id }`" class="btn btn-primary btn-sm"> Edit </a>
+                                            <button @click="deleteItem(donor.id)" class="btn btn-danger btn-sm"> Delete </button>
+                                        </td>
                                         <!-- <td>{{ request.created_at }}</td>
                                         <td>{{ request.updated_at }}</td> -->
                                     </tr>
@@ -92,6 +97,8 @@
 <script>
 export default {
 
+    props:['roles'],
+
     data() {
         return {
             errors: [],
@@ -117,12 +124,32 @@ export default {
             axios.get('/api/donors')
                 .then(response => {
                     this.donors = response.data.data;
-                    console.log('check blood request: ', this.donors)
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;
                 })
-        }
+        },
+
+        deleteItem(id) {
+
+            axios.delete(`/api/donors/${id}`)
+            .then(response => {
+                if(response.status === 200) {
+                    window.location.href = response.data.redirect;
+                }
+            })
+
+        },
+
+        isAuthorized(id) {
+            if(this.roles) {
+                if(this.roles.includes(id)) {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        },
     }
 }
 </script>

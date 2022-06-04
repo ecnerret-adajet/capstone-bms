@@ -29,6 +29,9 @@ class DonorResource extends JsonResource
             'weight' => $this->weight,
             'bloodType' => $this->bloodType,
             'rhGroup' => $this->rhGroup,
+            'name' => $this->user ? $this->user->name : null,
+            'email' => $this->user ? $this->user->email : null,
+            'role_id' => $this->user ? $this->user->roles->pluck('id')[0] : null,
         ];
     }
 }

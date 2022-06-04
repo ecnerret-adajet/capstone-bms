@@ -14,16 +14,15 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">A+</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.a }}</span>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.a_pos }}</span>
                     </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                        <i class="ni ni-active-40"></i>
-                      </div>
+                    <div class="col">
+                       <h5 class="card-title text-uppercase text-muted mb-0">A-</h5>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.a_neg }}</span>
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span> -->
                     <span class="text-nowrap">Since last month</span>
                   </p>
                 </div>
@@ -37,16 +36,15 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">B+</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.b }}</span>
+                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.b_pos }}</span>
                     </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
-                      </div>
+                    <div class="col">
+                       <h5 class="card-title text-uppercase text-muted mb-0">B-</h5>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.b_neg }}</span>
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span> -->
                     <span class="text-nowrap">Since last month</span>
                   </p>
                 </div>
@@ -60,16 +58,15 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">AB+</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.ab }}</span>
+                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.ab_pos }}</span>
                     </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
-                      </div>
+                    <div class="col">
+                       <h5 class="card-title text-uppercase text-muted mb-0">AB-</h5>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.ab_neg }}</span>
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span> -->
                     <span class="text-nowrap">Since last month</span>
                   </p>
                 </div>
@@ -83,16 +80,15 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">O+</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.o }}</span>
+                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.o_pos }}</span>
                     </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                        <i class="ni ni-chart-pie-35"></i>
-                      </div>
+                    <div class="col">
+                       <h5 class="card-title text-uppercase text-muted mb-0">O-</h5>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.o_neg }}</span>
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span> -->
                     <span class="text-nowrap">Since last month</span>
                   </p>
                 </div>

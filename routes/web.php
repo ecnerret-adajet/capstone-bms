@@ -77,6 +77,10 @@ Route::get('/donors/create', [DonorsController::class, 'create'])
     ->name('donors.create')
     ->middleware('auth');
 
+Route::get('/donors/edit/{donor}', [DonorsController::class, 'edit'])
+    ->name('donors.edit')
+    ->middleware('auth');
+
 // Hospitals
 Route::get('/hospitals', [HospitalsControllers::class, 'index'])
     ->name('hospitals')
@@ -84,6 +88,10 @@ Route::get('/hospitals', [HospitalsControllers::class, 'index'])
 
 Route::get('/hospitals/create', [HospitalsControllers::class, 'create'])
     ->name('hospitals.create')
+    ->middleware('auth');
+
+Route::get('/hospitals/edit/{hospital}',[HospitalsControllers::class, 'edit'])
+    ->name('hospitals.edit')
     ->middleware('auth');
 
 // Events

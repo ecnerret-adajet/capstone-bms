@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <donor-index></donor-index>
+    <donor-index :roles="{{ Auth::user()->roles->pluck('id') }}"></donor-index>
 @endsection

@@ -69,9 +69,9 @@ class HospitalsApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Hospital $hospital)
     {
-        //
+        return new HospitalResource($hospital);
     }
 
     /**
@@ -81,9 +81,26 @@ class HospitalsApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Hospital $hospital)
     {
-        //
+        Request::validate([
+            'hospital_name' => ['required'],
+            'address' => ['required'],
+            'name' => 'required',
+            'email' => 'required',
+        ]);
+
+        $user = User::where('id', $hospital->user_id)->first();
+        $user->name =  Request::get('name');
+        $user->email =  Request::get('email');
+        $user->password = bcrypt(Request::get('password'));
+        $user->syncRoles(Request::get('role_id'));
+
+        $hospital->hospital_name = Request::get('hospital_name');
+        $hospital->address = Request::get('address');
+        $hospital->save();
+
+        return ['redirect' => route('hospitals')];
     }
 
     /**
@@ -92,8 +109,9 @@ class HospitalsApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Hospital $hospital)
     {
-        //
+        $hospital->delete();
+        return ['redirect' => route('hospitals')];
     }
 }

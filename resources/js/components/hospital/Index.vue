@@ -29,11 +29,12 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Address</th>
                                     <th scope="col">User</th>
+                                    <th scope="col"  v-if="isAuthorized(1)"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-if="hospitals.length === 0">
-                                        <td colspan="3">
+                                        <td colspan="4">
                                         <h3 class="text-muted text-center pt-3 pb-3">No Data</h3>
                                         </td>
                                     </tr>
@@ -53,6 +54,10 @@
                                         <td>{{ hospital.hospital_name }}</td>
                                         <td>{{ hospital.address }}</td>
                                         <td>{{ hospital.user.name }}</td>
+                                        <td  v-if="isAuthorized(1)">
+                                             <a :href="`/hospitals/edit/${hospital.id }`" class="btn btn-primary btn-sm"> Edit </a>
+                                            <button @click="deleteItem(hospital.id)" class="btn btn-danger btn-sm"> Delete </button>
+                                        </td>
                                         <!-- <td>{{ request.created_at }}</td>
                                         <td>{{ request.updated_at }}</td> -->
                                     </tr>
@@ -84,6 +89,8 @@
 <script>
 export default {
 
+    props:['roles'],
+
     data() {
         return {
             errors: [],
@@ -113,7 +120,28 @@ export default {
                 .catch(error => {
                     this.errors = error.response.data.errors;
                 })
-        }
+        },
+
+        deleteItem(id) {
+
+            axios.delete(`/api/hospitals/${id}`)
+            .then(response => {
+                if(response.status === 200) {
+                    window.location.href = response.data.redirect;
+                }
+            })
+
+        },
+
+        isAuthorized(id) {
+            if(this.roles) {
+                if(this.roles.includes(id)) {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        },
     }
 }
 </script>

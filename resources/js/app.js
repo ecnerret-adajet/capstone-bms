@@ -39,10 +39,12 @@ Vue.component('bloodrequest-edit', require('./components/bloodrequest/Edit.vue')
 Vue.component('donor-index', require('./components/donor/Index.vue').default);
 Vue.component('donor-profile', require('./components/donor/Profile.vue').default);
 Vue.component('donor-create', require('./components/donor/Create.vue').default);
+Vue.component('donor-edit', require('./components/donor/Edit.vue').default);
 
 //hospital
 Vue.component('hospital-index', require('./components/hospital/Index.vue').default);
 Vue.component('hospital-create', require('./components/hospital/Create.vue').default);
+Vue.component('hospital-edit', require('./components/hospital/Edit.vue').default);
 
 //events
 Vue.component('event-index', require('./components/events/Index.vue').default);

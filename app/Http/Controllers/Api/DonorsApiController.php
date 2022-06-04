@@ -131,13 +131,27 @@ class DonorsApiController extends Controller
         Request::validate([
             'first_name' => ['required'],
             'last_name' => ['required'],
+            'email' => ['required'],
             'phone_number' => ['required'],
             'blood_type_id' => ['required'],
             'rh_group_id' => ['required'],
             'gender_id' => ['required'],
         ]);
 
-        $donor->update(Request::all());
+        $user = User::where('id', $donor->user_id)->first();
+        $user->name =  Request::get('first_name').' '.Request::get('last_name');
+        $user->email =  Request::get('email');
+        $user->password = bcrypt(Request::get('password'));
+        $user->syncRoles(Request::get('role_id'));
+
+        $donor->first_name = Request::get('first_name');
+        $donor->last_name = Request::get('last_name');
+        $donor->phone_number = Request::get('phone_number');
+        $donor->birthdate = Request::get('birthdate');
+        $donor->height = Request::get('height');
+        $donor->weight = Request::get('weight');
+        $donor->address = Request::get('address');
+        $donor->user_id = $user->id;
         $donor->gender()->associate(Request::get('gender_id'));
         $donor->bloodType()->associate(Request::get('blood_type_id'));
         $donor->rhGroup()->associate(Request::get('rh_group_id'));
@@ -152,8 +166,9 @@ class DonorsApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Donor $donor)
     {
-        //
+        $donor->delete();
+        return ['redirect' => route('donors')]; 
     }
 }

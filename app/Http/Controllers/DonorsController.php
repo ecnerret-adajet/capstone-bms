@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Donor;
-use App\Gender;
-use App\BloodType;
-use App\RhGroup;
+use App\Models\Donor;
+use App\Models\Gender;
+use App\Models\BloodType;
+use App\Models\RhGroup;
 
 class DonorsController extends Controller
 {
@@ -83,7 +83,7 @@ class DonorsController extends Controller
      */
     public function edit(Donor $donor)
     {
-        return view('donors.edit', $donor);
+        return view('donors.edit', compact('donor'));
     }
 
     /**

@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <bloodrequest-profile :roles="{{ Auth::user()->roles->pluck('id') }}" ></bloodrequest-profile>
+    <bloodrequest-profile></bloodrequest-profile>
 @endsection

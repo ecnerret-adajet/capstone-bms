@@ -32,10 +32,14 @@ class BloodBankApiController extends Controller
         // return $bloodBankSummary;
 
         return array(
-            'a' => BloodBankSummary::where('blood_type_id',1)->sum('quantity'),
-            'b' => BloodBankSummary::where('blood_type_id',2)->sum('quantity'),
-            'ab' => BloodBankSummary::where('blood_type_id',3)->sum('quantity'),
-            'o' => BloodBankSummary::where('blood_type_id',4)->sum('quantity'),
+            'a_pos' => BloodBankSummary::where('blood_type_id',1)->sum('quantity'),
+            'b_pos' => BloodBankSummary::where('blood_type_id',2)->sum('quantity'),
+            'ab_pos' => BloodBankSummary::where('blood_type_id',3)->sum('quantity'),
+            'o_pos' => BloodBankSummary::where('blood_type_id',4)->sum('quantity'),
+            'a_neg' => BloodBankSummary::where('blood_type_id',5)->sum('quantity'),
+            'b_neg' => BloodBankSummary::where('blood_type_id',6)->sum('quantity'),
+            'ab_neg' => BloodBankSummary::where('blood_type_id',7)->sum('quantity'),
+            'o_neg' => BloodBankSummary::where('blood_type_id',8)->sum('quantity'),
         );
     }
 

@@ -52,6 +52,9 @@ Route::group(['middleware' => 'auth:api'], function() {
     //hospital api
     Route::get('/hospitals', [HospitalsApiController::class, 'index']);
     Route::post('/hospitals',[HospitalsApiController::class,'store']);
+    Route::post('/hospitals/{hospital}',[HospitalsApiController::class,'update']);
+    Route::get('/hospitals/{hospital}',[HospitalsApiController::class,'show']);
+    Route::delete('/hospitals/{hospital}',[HospitalsApiController::class,'destroy']);
 
     //hospital api
     Route::get('/events', [EventApiController::class, 'index']);
@@ -74,7 +77,9 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/donors', [DonorsApiController::class, 'index']);
     Route::get('/donors-profile', [DonorsApiController::class, 'donorProfile']);
     Route::post('/donors', [DonorsApiController::class, 'store']);
+    Route::get('/donors/{donor}', [DonorsApiController::class, 'show']);
     Route::post('/donors/{donor}', [DonorsApiController::class, 'update']);
+    Route::delete('/donors/{donor}', [DonorsApiController::class, 'destroy']);
     
     //gender
     Route::get('/genders',[GendersApiController::class,'index']);

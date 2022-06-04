@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use App\Models\Hospital; 
 
 class HospitalsControllers extends Controller
 {
@@ -54,9 +57,9 @@ class HospitalsControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Hospital $hospital)
     {
-        //
+        return view('hospitals.edit',compact('hospital'));
     }
 
     /**

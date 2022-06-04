@@ -1,174 +1,269 @@
 <template>
-  <div>
-        <div class="header bg-red pb-6 pt-5 pt-md-6"></div>
+    <div>
+        <div class="header bg-danger pb-6 pt-5 pt-md-6"> </div>
+        <!-- Page content -->
         <div class="container-fluid mt--7">
-            <!-- Table -->
             <div class="row mt-5">
-                <div class="col">
-                    <div class="card shadow">
-
-                        <div class="card-header border-0">
+                <div class="col-xl-12 order-xl-1">
+                    <div class="card bg-secondary shadow">
+                        <div class="card-header bg-white border-0">
                             <div class="row align-items-center">
-                                <div class="col">
-                                    <h3 class="mb-0">Blood Requests</h3>
-                                </div>
-                                <div class="col text-right">
-                                    <a :href="createLink" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#addModal">Add New</a>
+                                <div class="col-8">
+                                    <h3 class="mb-0">Blood Request Details</h3>
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <div class="col-md-4 float-left">
-                                <input type="text" class="form-control" placeholder="Search" v-model="keywords" id="name">
+                        <div class="card-body">
+
+                            <div v-if="submitted" class="alert alert-success alert-dismissible fade show" role="alert">
+                            <span class="alert-inner--icon"><i class="ni ni-support-16"></i></span>
+                            <span class="alert-inner--text">
+                                Profile successfully updated!
+                            </span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                            </button>
                             </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table align-items-center table-flush">
-                                <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Patient Name</th>
-                                    <th scope="col">Diagnosies</th>
-                                    <th scope="col">Bag Quantiy</th>
-                                    <th scope="col">Hospital</th>
-                                    <th scope="col">Blood Type</th>
-                                    <th scope="col">Purpose</th>
-                                    <th scope="col">Status</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-if="bloodRequests.length === 0"  colspan="7">
-                                        <h3 class="text-muted text-center pt-3 pb-3">No Data</h3>
-                                    </tr>
-                                    <tr v-else v-for="(request, a) in bloodRequests" v-bind:key="a">
-                                        <!-- <td class="text-right">
-                                            <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="javascript:void(0)" @click="copyObject(announcement)" data-toggle="modal" data-target="#editModal">Edit</a>
-                                                    <a class="dropdown-item" href="#deleteModal" data-toggle="modal" @click="getAnnouncementId(announcement.id)">Delete</a>
-                                                </div>
+
+                            <form>
+                                <h6 class="heading-small text-muted mb-4">Blood Requests Information</h6>
+                                <div class="pl-lg-4">
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-username">Patient Name</label>
+                                                <input type="text" id="input-username" class="form-control form-control-alternative" v-model="bloodrequest.patient_name">
+                                                <!-- <span class="text-danger" v-if="errors.patient_name">{{ errors.patient_name[0] }}</span> -->
                                             </div>
-                                        </td> -->
-                                        <td>{{ request.patient_name }}</td>
-                                        <td>{{ request.diagnosies }}</td>
-                                        <td>{{ request.bag_quantity }}</td>
-                                        <td>{{ request.hospital ? request.hospital.hospital_name : 'N/A' }}</td>
-                                        <td>{{ request.hospital ? request.bloodType.name : 'N/A' }}</td>
-                                        <td>{{ request.purpose ? request.purpose.name : 'N/A' }}</td>
-                                        <td>{{ request.status ? request.status.name : 'N/A' }}</td>
-                                        <!-- <td>{{ request.created_at }}</td>
-                                        <td>{{ request.updated_at }}</td> -->
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-username">Diagnosies</label>
+                                                <input type="text" id="input-username" class="form-control form-control-alternative" v-model="bloodrequest.diagnosies">
+                                                <!-- <span class="text-danger" v-if="errors.patient_name">{{ errors.patient_name[0] }}</span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-username">Bag Quantiy</label>
+                                                <input type="number" id="input-username" class="form-control form-control-alternative" v-model="bloodrequest.bag_quantity">
+                                                <!-- <span class="text-danger" v-if="errors.patient_name">{{ errors.patient_name[0] }}</span> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="role">Purpose</label>
+                                                <select class="form-control" v-model="bloodrequest.purpose_id">
+                                                    <option v-for="(purpose,b) in purposes" v-bind:key="b" :value="purpose.id"> {{ purpose.name }}</option>
+                                                </select>
+                                                <!-- <span class="text-danger" v-if="errors.purpose_id  ">{{ errors.purpose_id[0] }}</span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="role">Blood Type</label>
+                                                <select class="form-control" v-model="bloodrequest.blood_type_id">
+                                                    <option v-for="(blood,b) in bloodtypes" v-bind:key="b" :value="blood.id"> {{ blood.name }}</option>
+                                                </select>
+                                                <!-- <span class="text-danger" v-if="errors.blood_type_id  ">{{ errors.blood_type_id[0] }}</span> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="role">Hospital</label>
+                                                <select class="form-control" v-model="bloodrequest.hospital_id">
+                                                    <option v-for="(hospital,b) in hospitals" v-bind:key="b" :value="hospital.id"> {{ hospital.hospital_name }}</option>
+                                                </select>
+                                                <!-- <span class="text-danger" v-if="errors.hospital_id  ">{{ errors.hospital_id[0] }}</span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="role">RH group</label>
+                                                <select class="form-control" v-model="bloodrequest.rh_group_id">
+                                                    <option v-for="(rhgroup,b) in rhgroups" v-bind:key="b" :value="rhgroup.id"> {{ rhgroup.name }}</option>
+                                                </select>
+                                                <!-- <span class="text-danger" v-if="errors.rh_group_id  ">{{ errors.rh_group_id[0] }}</span> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="role">Urgency</label>
+                                                <select class="form-control" v-model="bloodrequest.urgency_id">
+                                                    <option v-for="(urgency,b) in urgencies" v-bind:key="b" :value="urgency.id"> {{ urgency.name }}</option>
+                                                </select>
+                                                <!-- <span class="text-danger" v-if="errors.urgency_id  ">{{ errors.urgency_id[0] }}</span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="text">
+                                            <button @click="submitForm(bloodrequest)" type="button" class="btn btn-primary mt-4">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                       <!-- <div class="card-footer py-4">
-                            <nav aria-label="...">
-                                <ul class="pagination justify-content-end mb-0">
-                                    <li class="page-item">
-                                        <button :disabled="!showPreviousLink()" class="page-link" v-on:click="setPage(currentPage - 1)"> <i class="fas fa-angle-left"></i> </button>
-                                    </li>
-                                    <li class="page-item">
-                                        Page {{ currentPage + 1 }} of {{ totalPages }}
-                                    </li>
-                                    <li class="page-item">
-                                        <button :disabled="!showNextLink()" class="page-link" v-on:click="setPage(currentPage + 1)"><i class="fas fa-angle-right"></i> </button>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
-
-
-         <!-- Approve Modal-->
-            <div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <!-- <input type="hidden" v-model="user_id"> -->
-                            <h5 class="modal-title" id="exampleModalLabel">Approve Schedule</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        Are you sure you want to approve this Schedule?
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" data-dismiss='modal'>Close</button>
-                            <button class="btn btn-primary" @click="confirmRequest(request, 1)">Approve</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
     </div>
 </template>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <script>
+import Multiselect from 'vue-multiselect';
 export default {
-
-    props:['roles'],
-
-    data() {
-        return {
+    components:{
+        Multiselect
+    },
+    // props: ['bloodrequest_id'],
+    data(){
+        return{
             errors: [],
-            bloodRequests: [],
-            keywords: '',
-            currentPage: 0,
-            itemsPerPage: 10,
+            bloodrequest:{},
+            // bloodrequest:{
+            //     patient_name: '',
+            //     blood_type_id: '',
+            //     rh_group_id: '',
+            //     purpose_id: '',
+            //     hospital_id: '',
+            //     urgency_id: '',
+            //     diagnosies: '',
+            //     bag_quantity: '',
+            //     attachment: ''
+            // },
+            hospitals: [],
+            bloodtypes: [],
+            purposes: [],
+            rhgroups: [],
+            urgencies: [],
+            submitted: false
         }
     },
-
-    mounted() {
-        this.getBloodRequests()
+    mounted(){
+        this.fetchBloodRequest();
+        this.fetchHospitalsData();
+        this.fetchBloodTypes();
+        this.fetchPurposes();
+        this.fetchrhgroups();
+        this.fetchUrgencies();
     },
 
-    computed: {
-        createLink(){
-            return window.location.origin+'/blood-requests/create';
-        },
-    },
+    methods:{
 
-    methods: {
-
-        isAuthorized(id) {
-            if(this.roles) {
-                if(this.roles.includes(id)) {
-                    return true;
-                }
-                return false;
-            }
-            return false;
-        },
-
-        confirmRequest(request, status) {
-            console.log('request dialog')
-        },
-
-        getBloodRequests() {
+        fetchBloodRequest() {
             axios.get('/api/blood-requests/profile')
                 .then(response => {
-                    this.bloodRequests = response.data.data;
-                    console.log('check blood request: ', this.bloodRequests)
+                    this.bloodrequest = response.data;
+                    console.log('check blood request: ', this.bloodrequest)
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;
                 })
-        }
+        },
+
+        // fetchBloodRequest(){
+        //     axios.get(`/api/blood-requests/${this.bloodrequest_id}`)
+        //     .then(response => { 
+        //         this.bloodrequest = response.data.data;
+        //     })
+        //     .catch(error => { 
+        //         this.errors = error.response.data.errors;
+        //     })
+        // },
+
+        submitForm(data) {
+            // console.log(data)
+            // console.log('blood type id ', data.blood_type_id,)
+            axios.post(`/api/blood-requests/${data.id}`, {
+                patient_name: data.patient_name,
+                blood_type_id: data.blood_type_id,
+                rh_group_id: data.rh_group_id,
+                purpose_id: data.purpose_id,
+                hospital_id: data.hospital_id,
+                urgency_id: data.urgency_id,
+                diagnosies: data.diagnosies,
+                bag_quantity: data.bag_quantity,
+                // attachment: data.attachment,
+            })
+            .then(response => {
+                console.log('response: ', response.status)
+                if(response.status === 200) {
+                    // window.location.href = response.data.redirect;
+                    this.submitted = true;
+                }
+            })
+            .catch(error => {
+                this.errors = error.response.data.errors;
+            })
+        },
+
+        fetchHospitalsData(){
+            axios.get('/api/hospitals')
+            .then(response => { 
+                console.log('check hospitals: ', response.data)
+                this.hospitals = response.data.data;
+            })
+            .catch(error => { 
+                this.errors = error.response.data.errors;
+            })
+        },
+
+        fetchBloodTypes(){
+            axios.get('/api/blood-types')
+            .then(response => { 
+                this.bloodtypes = response.data;
+            })
+            .catch(error => { 
+                this.errors = error.response.data.errors;
+            })
+        },
+
+        fetchPurposes(){
+            axios.get('/api/purposes')
+            .then(response => { 
+                this.purposes = response.data;
+            })
+            .catch(error => { 
+                this.errors = error.response.data.errors;
+            })
+        },
+
+        fetchrhgroups(){
+            axios.get('/api/rh-groups')
+            .then(response => { 
+                this.rhgroups = response.data;
+            })
+            .catch(error => { 
+                this.errors = error.response.data.errors;
+            })
+        },
+
+        fetchUrgencies(){
+            axios.get('/api/urgencies')
+            .then(response => { 
+                this.urgencies = response.data;
+            })
+            .catch(error => { 
+                this.errors = error.response.data.errors;
+            })
+        },
     }
 }
 </script>

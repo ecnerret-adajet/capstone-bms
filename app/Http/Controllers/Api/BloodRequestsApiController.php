@@ -73,11 +73,11 @@ class BloodRequestsApiController extends Controller
      */
     public function requestorProfile()
     {
-        $bloodRequests = BloodRequest::orderBy('id','desc')
-                    ->where('user_id',Auth::user()->id)
-                    ->get();
+        $bloodRequest = BloodRequest::where('user_id',Auth::user()->id)->first();
+
+        return $bloodRequest;
                     
-        return BloodRequestResource::collection($bloodRequests);
+        return BloodRequestResource::collection($bloodRequest);
     }
 
     /**
@@ -187,13 +187,13 @@ class BloodRequestsApiController extends Controller
             'status_id' => ['required'],
         ]);
 
-        $bloodRequest->status_id = Request::get('status_id');
-        $bloodRequest->save();
-
         if(Request::get('status_id') == 1) {
             $checkAvailability = BloodBankSummary::where('blood_type_id', $bloodRequest->blood_type_id)->sum('quantity');
 
             if($checkAvailability > $bloodRequest->bag_quantity) {
+
+                $bloodRequest->status_id = Request::get('status_id');
+                $bloodRequest->save();
 
                 $getBloodInventory = BloodBankSummary::where('blood_type_id', $bloodRequest->blood_type_id)->first();
 
@@ -210,6 +210,9 @@ class BloodRequestsApiController extends Controller
                 ]);
             }
         }
+
+        $bloodRequest->status_id = Request::get('status_id');
+        $bloodRequest->save();
 
         return ['redirect' => route('blood-requests')];
     }
