@@ -50,7 +50,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/blood-requests/profile') }}">
                 <i class="ni ni-circle-08  text-orange"></i>
-                <span class="nav-link-text">Requestor Profile</span>
+                <span class="nav-link-text">Hospital Profile</span>
               </a>
             </li>
             @endrole

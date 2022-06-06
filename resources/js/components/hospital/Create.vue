@@ -32,7 +32,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-username">Addres</label>
+                                                <label class="form-control-label" for="input-username">Address</label>
                                                 <input type="text" id="input-username" placeholder="Enter Address" class="form-control form-control-alternative" v-model="hospital.address">
                                                 <span class="text-danger" v-if="errors.address">{{ errors.address[0] }}</span>
                                             </div>

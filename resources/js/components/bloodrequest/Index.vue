@@ -69,9 +69,9 @@
                                 <div class="col">
                                     <h3 class="mb-0">Blood Requests</h3>
                                 </div>
-                                <!-- <div class="col text-right">
-                                    <a :href="createLink" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#addModal">Add New</a>
-                                </div> -->
+                                <div class="col text-right">
+                                    <a v-if="isAuthorized(3)" :href="createLink" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#addModal">Add New</a>
+                                </div>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -119,8 +119,11 @@
                                         <td>{{ request.purpose ? request.purpose.name : 'N/A' }}</td>
                                         <td>{{ request.status ? request.status.name : 'Pending' }}</td>
                                         <td>
-                                            <a :href="`/blood-requests/edit/${ request.id }`" class="btn btn-primary btn-sm"> Edit </a>
-                                            <button @click="removeRequest(request.id)" class="btn btn-danger btn-sm"> Delete </button>
+                                            <a v-if="!request.status" :href="`/blood-requests/edit/${ request.id }`" class="btn btn-primary btn-sm"> Edit </a>
+                                            <button v-if="!request.status" @click="removeRequest(request.id)" class="btn btn-danger btn-sm"> Delete </button>
+
+                                            <button v-if="request.status" disabled  class="btn btn-secondary btn-sm"> Edit </button>
+                                            <button v-if="request.status" disabled class="btn btn-secondary btn-sm"> Delete </button>
                                         </td>
                                         <td v-if="isAuthorized(1)">
                                             <span v-if="!request.status">
@@ -299,7 +302,6 @@ export default {
                     this.errors = error.response.data.errors;
                 })
         },
-
 
     }
 }

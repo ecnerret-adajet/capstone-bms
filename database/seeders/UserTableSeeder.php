@@ -18,10 +18,10 @@ class UserTableSeeder extends Seeder
          * Add Users
          *
          */
-        if (User::where('email', '=', 'admin@admin.com')->first() === null) {
+        if (User::where('email', '=', 'admin@gmail.com')->first() === null) {
             $newUser = User::create([
                 'name'     => 'Admin',
-                'email'    => 'admin@admin.com',
+                'email'    => 'admin@gmail.com',
                 'password' => bcrypt('password'),
             ]);
         }

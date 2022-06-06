@@ -24,6 +24,18 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user_role = Auth::user()->roles->first()->id;
+
+        switch ($user_role) {
+            case 2: // donor
+                return redirect('events');
+                break;
+            default:
+                return view('home');
+                break;
+        }
+
         return view('home');
+
     }
 }
