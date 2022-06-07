@@ -90,6 +90,10 @@ Route::get('/hospitals/create', [HospitalsControllers::class, 'create'])
     ->name('hospitals.create')
     ->middleware('auth');
 
+Route::get('/hospitals/profile', [HospitalsControllers::class, 'profile'])
+    ->name('hospitals.profile')
+    ->middleware('auth');
+
 Route::get('/hospitals/edit/{hospital}',[HospitalsControllers::class, 'edit'])
     ->name('hospitals.edit')
     ->middleware('auth');

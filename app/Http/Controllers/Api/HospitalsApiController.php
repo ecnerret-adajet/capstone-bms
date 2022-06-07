@@ -75,6 +75,15 @@ class HospitalsApiController extends Controller
     }
 
     /**
+     * Show hospital own profile
+     */
+    public function profile()
+    {
+        $hospital = Hospital::where('user_id',Auth::user()->id)->first();
+        return new HospitalResource($hospital);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

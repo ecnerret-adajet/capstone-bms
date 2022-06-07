@@ -53,6 +53,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/hospitals', [HospitalsApiController::class, 'index']);
     Route::post('/hospitals',[HospitalsApiController::class,'store']);
     Route::post('/hospitals/{hospital}',[HospitalsApiController::class,'update']);
+    Route::get('/hospitals/profile',[HospitalsApiController::class,'profile']);
     Route::get('/hospitals/{hospital}',[HospitalsApiController::class,'show']);
     Route::delete('/hospitals/{hospital}',[HospitalsApiController::class,'destroy']);
 

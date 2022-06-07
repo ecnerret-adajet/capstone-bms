@@ -52,6 +52,15 @@ class HospitalsControllers extends Controller
     }
 
     /**
+     * Display page for profile
+     */
+    public function profile()
+    {
+        return view('hospitals.profile');
+    }
+
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

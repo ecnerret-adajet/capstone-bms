@@ -46,9 +46,9 @@
             </li>
             @endrole
 
-            @role('requestor')
+            @role('requestor') 
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/blood-requests/profile') }}">
+              <a class="nav-link" href="{{ url('/hospitals/profile') }}">
                 <i class="ni ni-circle-08  text-orange"></i>
                 <span class="nav-link-text">Hospital Profile</span>
               </a>

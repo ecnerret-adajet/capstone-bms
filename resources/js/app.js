@@ -45,6 +45,7 @@ Vue.component('donor-edit', require('./components/donor/Edit.vue').default);
 Vue.component('hospital-index', require('./components/hospital/Index.vue').default);
 Vue.component('hospital-create', require('./components/hospital/Create.vue').default);
 Vue.component('hospital-edit', require('./components/hospital/Edit.vue').default);
+Vue.component('hospital-profile', require('./components/hospital/Profile.vue').default);
 
 //events
 Vue.component('event-index', require('./components/events/Index.vue').default);
