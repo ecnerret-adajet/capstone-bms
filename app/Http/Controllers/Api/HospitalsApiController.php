@@ -103,7 +103,8 @@ class HospitalsApiController extends Controller
         $user->name =  Request::get('name');
         $user->email =  Request::get('email');
         $user->password = bcrypt(Request::get('password'));
-        $user->syncRoles(Request::get('role_id'));
+
+        // $user->syncRoles(Request::get('role_id'));
 
         $hospital->hospital_name = Request::get('hospital_name');
         $hospital->address = Request::get('address');

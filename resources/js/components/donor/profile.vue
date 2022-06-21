@@ -48,6 +48,31 @@
                         </div>
                         </div>
                         <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label
+                                        class="form-control-label"
+                                        for="input-username"
+                                        >Password</label
+                                    >
+                                    <input
+                                        type="password"
+                                        id="input-username"
+                                        placeholder="Enter Password"
+                                        class="form-control form-control-alternative"
+                                        v-model="donor.password"
+                                    />
+                                    <span
+                                        class="text-danger"
+                                        v-if="errors.password"
+                                        >{{
+                                            errors.password[0]
+                                        }}</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                         <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label" for="input-first-name">Gender</label>
