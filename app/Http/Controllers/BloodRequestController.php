@@ -11,6 +11,7 @@ use App\Models\BloodPackNeed;
 use App\Models\Urgency;
 use App\Models\RhGroup;
 use App\Http\Resources\BloodRequestResource;
+use Illuminate\Support\Facades\Storage;
 
 class BloodRequestController extends Controller
 {
@@ -71,11 +72,29 @@ class BloodRequestController extends Controller
         
         $bloodRequest->save();
 
-        // return $bloodRequest;
+        return $bloodRequest;
 
-        return ['redirect' => route('blood-requests')];
+        // return ['redirect' => route('blood-requests')];
 
         // return Redirect::route('blood-requests')->with('success','Successfully created.');
+    }
+
+    /**
+     * attach to blood requests
+     */
+    public function attachFile(Request $request, $bloodrequest)
+    {
+
+    Request::validate([
+        'attachment' => ['required'],
+    ]);
+
+    $findBloodRequest = BloodRequest::where('id', $bloodrequest)->first();
+    $findBloodRequest->attachment =  Request::file('attachment')->store('attachment','public');
+    $findBloodRequest->save();
+    
+    //    return $attachment;
+       return ['redirect' => route('blood-requests')];
     }
 
     /**
@@ -104,6 +123,12 @@ class BloodRequestController extends Controller
     public function edit(BloodRequest $bloodRequest)
     {
         return view('bloodRequests.edit',compact('bloodRequest'));
+    }
+
+    public function attachmentDownload(BloodRequest $bloodRequest)
+    {        
+        $basename = basename($bloodRequest->attachment);
+        return Storage::disk('attachment')->download($bloodRequest->attachment, $basename);
     }
 
     /**

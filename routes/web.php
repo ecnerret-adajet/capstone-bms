@@ -52,6 +52,14 @@ Route::post('/blood-requests', [BloodRequestController::class, 'store'])
     ->name('blood-requests.store')
     ->middleware('auth');
 
+Route::post('/blood-requests-attachment/{bloodrequest}', [BloodRequestController::class, 'attachFile'])
+    ->name('blood-requests.attachment')
+    ->middleware('auth');
+
+// Download BL document
+Route::get('blood-requests-download/{bloodRequest}',[BloodRequestController::class,'attachmentDownload'])
+    ->name('blood-requests.download');
+
 Route::get('/blood-requests/create', [BloodRequestController::class, 'create'])
     ->name('blood-requests.create')
     ->middleware('auth');

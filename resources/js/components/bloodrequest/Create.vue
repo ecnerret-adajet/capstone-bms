@@ -100,8 +100,11 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="role">Document Upload</label>
-                                                <input type="file" :class="{' is-invalid':errors.attachment,}" @input="bloodrequest.attachment = $event.target.files[0]" class="form-control" id="customFile"/>
-
+                                                <!-- <input type="file" :class="{' is-invalid':errors.attachment,}" @input="bloodrequest.attachment = $event.target.files[0]" class="form-control" id="customFile"/> -->
+                                                <input type="file" class="form-control" :class="{ ' is-invalid' : error.attachment }" id="attachment" name="attachment" ref="attachment"  @change="onFileChange">
+                                                <div v-if="error.attachment" class="invalid-feedback">
+                                                    {{ error.attachment }}
+                                                </div>
                                                 <!-- <input type="text" id="input-username" class="form-control form-control-alternative" v-model="bloodrequest.diagnosies"> -->
                                                 <!-- <span class="text-danger" v-if="errors.rh_group_id  ">{{ errors.rh_group_id[0] }}</span> -->
                                             </div>
@@ -136,6 +139,9 @@ export default {
     data(){
         return{
             errors: [],
+            error: [],
+            attachment: '',
+            uploading: false,
             bloodrequest:{
                 patient_name: '',
                 blood_type_id: '',
@@ -165,8 +171,10 @@ export default {
     methods:{
 
         submitForm(data) {
-            console.log(data)
-            console.log('blood type id ', data.blood_type_id,)
+
+            console.log('to save data: ',data)
+            // console.log('blood type id ', data.blood_type_id,)
+
             axios.post(`/blood-requests`, {
                 patient_name: data.patient_name,
                 blood_type_id: data.blood_type_id,
@@ -176,17 +184,46 @@ export default {
                 urgency_id: data.urgency_id,
                 diagnosies: data.diagnosies,
                 bag_quantity: data.bag_quantity,
-                attachment: data.attachment,
             })
             .then(response => {
                 // console.log('response: ', response.status)
-                if(response.status === 200) {
-                    window.location.href = response.data.redirect;
+                console.log('check status: ', response.status)
+                if(response.status === 200 || response.status === 201) {
+                    // window.location.href = response.data.redirect;
+
+                    this.attachDoc(response.data.id)
                 }
             })
             .catch(error => {
                 this.errors = error.response.data.errors;
             })
+        },
+
+        onFileChange(e) {
+            this.attachment = e.target.files[0];
+        },
+
+        attachDoc(bloodrequest_id) {
+
+            let formData = new FormData();
+            formData.append('attachment', this.attachment);
+            
+            axios.post(`/blood-requests-attachment/${bloodrequest_id}`, formData, {
+            headers: { 'content-type': 'multipart/form-data' }
+            })
+            .then(response => {
+                if(response.status === 200 || response.status === 201) {
+                     this.uploading = false
+                    console.log('uploaded attachment blood request')
+
+                    window.location.href = response.data.redirect;
+                }
+            })
+            .catch(error => {
+                this.uploading = false
+                this.error = error.response.data
+                console.log('check error: ', this.error)
+            });
         },
 
         fetchHospitalsData(){

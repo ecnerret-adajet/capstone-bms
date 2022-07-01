@@ -37,7 +37,7 @@
             </li>
             @endrole
       
-            @role('administrator|requestor')
+            @role('administrator')
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/blood-banks') }}">
                 <i class="ni ni-app  text-red"></i>

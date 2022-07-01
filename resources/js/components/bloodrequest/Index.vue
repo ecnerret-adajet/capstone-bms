@@ -90,6 +90,7 @@
                                     <th scope="col">Blood Type</th>
                                     <th scope="col">Purpose</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Attachment</th>
                                     <th scope="col"></th>
                                     <th scope="col" v-if="isAuthorized(1)"></th>
                                 </tr>
@@ -118,6 +119,15 @@
                                         <td>{{ request.hospital ? request.bloodType.name : 'N/A' }}</td>
                                         <td>{{ request.purpose ? request.purpose.name : 'N/A' }}</td>
                                         <td>{{ request.status ? request.status.name : 'Pending' }}</td>
+                                        <td>
+                                            <a v-if="request.attachment" :href="`${baseUrl}/blood-requests-download/${request.id}`"  target="_blank" class="btn btn-primary btn-sm">
+                                                Download Attachment
+                                            </a>
+                                            <button v-else disabled class="btn btn-secondary btn-sm">
+                                                No Attachment
+                                            </button>
+                                            
+                                        </td>
                                         <td>
                                             <a v-if="!request.status" :href="`/blood-requests/edit/${ request.id }`" class="btn btn-primary btn-sm"> Edit </a>
                                             <button v-if="!request.status" @click="removeRequest(request.id)" class="btn btn-danger btn-sm"> Delete </button>
@@ -210,6 +220,7 @@ export default {
 
     data() {
         return {
+            baseUrl: window.location.origin,
             totalApprovedBags: 0,
             totalApprovedRequests: 0,
             totalPending: 0,
