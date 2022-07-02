@@ -32,7 +32,6 @@ class BloodRequestsApiController extends Controller
 
         }
         $hospital = Auth::user()->hospital;
-
         $ownbloodRequests = BloodRequest::where('hospital_id',$hospital->id)->orderBy('id','desc')->get();
         return BloodRequestResource::collection($ownbloodRequests);
     }
@@ -54,7 +53,11 @@ class BloodRequestsApiController extends Controller
             return $bloodRequests;
         }
 
-        $ownbloodRequests = BloodRequest::where('status_id',1)->where('status_id',1)->count();
+        $hospital = Auth::user()->hospital;
+        $ownbloodRequests = BloodRequest::where('hospital_id',$hospital->id)
+                        ->where('status_id',1)
+                        ->count();
+                        
         return $ownbloodRequests;
     }
 
@@ -66,7 +69,11 @@ class BloodRequestsApiController extends Controller
             return $bloodRequests;
         }
 
-        $ownbloodRequests = BloodRequest::where('status_id',1)->where('status_id', 0)->count();
+        $hospital = Auth::user()->hospital;
+        $ownbloodRequests = BloodRequest::where('hospital_id',$hospital->id)
+                        ->where('status_id', 0)
+                        ->count();
+
         return $ownbloodRequests;
     }
 
