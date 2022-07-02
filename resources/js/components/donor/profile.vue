@@ -191,6 +191,7 @@ export default {
     methods: {
 
         updateDonorsProfile(data) {
+            console.log('check data to send: ', data)
             axios.post(`/api/donors/${data.id}`, data)
             .then(response => {
                 console.log('response: ', response.status)

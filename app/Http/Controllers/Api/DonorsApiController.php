@@ -131,8 +131,6 @@ class DonorsApiController extends Controller
         Request::validate([
             'first_name' => ['required'],
             'last_name' => ['required'],
-            'email' => ['required'],
-            'phone_number' => ['required'],
             'blood_type_id' => ['required'],
             'rh_group_id' => ['required'],
             'gender_id' => ['required'],
@@ -140,9 +138,9 @@ class DonorsApiController extends Controller
 
         $user = User::where('id', $donor->user_id)->first();
         $user->name =  Request::get('first_name').' '.Request::get('last_name');
-        $user->email =  Request::get('email');
+        // $user->email =  Request::get('email');
         $user->password = bcrypt(Request::get('password'));
-        $user->syncRoles(Request::get('role_id'));
+        $user->save();
 
         $donor->first_name = Request::get('first_name');
         $donor->last_name = Request::get('last_name');
