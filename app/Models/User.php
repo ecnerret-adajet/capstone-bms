@@ -60,6 +60,11 @@ class User extends Authenticatable
         return $this->hasMany(Hospital::class);
     }
 
+    public function hospital()
+    {
+        return $this->hasOne(Hospital::class);
+    }
+
     public function bloodBanks()
     {
         return $this->hasMany(BloodBank::class);

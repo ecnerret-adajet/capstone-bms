@@ -31,7 +31,9 @@ class BloodRequestsApiController extends Controller
             return BloodRequestResource::collection($bloodRequests);
 
         }
-        $ownbloodRequests = BloodRequest::where('user_id',Auth::user()->id)->orderBy('id','desc')->get();
+        $hospital = Auth::user()->hospital;
+
+        $ownbloodRequests = BloodRequest::where('hospital_id',$hospital->id)->orderBy('id','desc')->get();
         return BloodRequestResource::collection($ownbloodRequests);
     }
 
