@@ -23,6 +23,34 @@
                                         <div class="col-lg">
                                             <div class="form-group">
                                                 <div class="form-group">
+                                                <label class="form-control-label" for="role">Event</label>
+                                                <select class="form-control" v-model="bloodbank.event_id">
+                                                    <option v-for="(event,e) in events" v-bind:key="e" :value="event.id"> {{ event.title }}</option>
+                                                </select>
+                                                <span class="text-danger" v-if="errors.event_id  ">{{ errors.event_id[0] }}</span>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                <label class="form-control-label" for="role">Donor</label>
+                                                <select class="form-control" v-model="bloodbank.donor_id">
+                                                    <option v-for="(donor,d) in donors" v-bind:key="d" :value="donor.id"> {{ donor.first_name }} {{ donor.last_name }}</option>
+                                                </select>
+                                                <span class="text-danger" v-if="errors.donor_id  ">{{ errors.donor_id[0] }}</span>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-lg">
+                                            <div class="form-group">
+                                                <div class="form-group">
                                                 <label class="form-control-label" for="role">Blood Type</label>
                                                 <select class="form-control" v-model="bloodbank.blood_type_id">
                                                     <option v-for="(blood,b) in bloodtypes" v-bind:key="b" :value="blood.id"> {{ blood.name }}</option>
@@ -36,7 +64,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-username">Quantiy</label>
+                                                <label class="form-control-label" for="input-username">Quantiy (bag)</label>
                                                 <input type="number" id="input-username" class="form-control form-control-alternative" v-model="bloodbank.quantity">
                                                 <span class="text-danger" v-if="errors.quantity">{{ errors.quantity[0] }}</span>
                                             </div>
@@ -83,6 +111,8 @@ export default {
     data(){
         return{
             errors: [],
+            events: [],
+            donors: [],
             bloodbank:{
                 quantity: '',
                 blood_type_id: '',
@@ -93,9 +123,25 @@ export default {
     },
     mounted(){
          this.fetchBloodTypes();
+         this.fetchDonors();
+         this.fetchEvents();
     },
 
     methods:{
+
+        fetchDonors() {
+            axios.get('/api/donors')
+            .then(response => {
+                this.donors = response.data.data
+            })
+        },
+
+        fetchEvents() {
+            axios.get('/api/events')
+            .then(response => {
+                this.events = response.data
+            })
+        },
 
         fetchBloodTypes(){
             axios.get('/api/blood-types')

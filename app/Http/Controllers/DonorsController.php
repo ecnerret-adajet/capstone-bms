@@ -30,6 +30,14 @@ class DonorsController extends Controller
     }
 
     /**
+     * Show donors hisotory page
+     */
+    public function history()
+    {
+        return view('donors.history');
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

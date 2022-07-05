@@ -13,11 +13,22 @@ class BloodBank extends Model
         'quantity',
         'blood_type_id',
         'remarks',
-        'user_id'
+        'user_id',
+        'expiration_date',
     ];
 
     public function bloodType()
     {
         return $this->belongsTo(BloodType::class);
+    }
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
+
+    public function donor()
+    {
+        return $this->belongsTo(Donor::class);
     }
 }

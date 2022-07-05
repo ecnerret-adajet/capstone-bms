@@ -17,6 +17,7 @@ class Donor extends Model
         'height',
         'weight',
         'user_id',
+        'donor_history',
     ];
 
     public function user()
@@ -37,5 +38,10 @@ class Donor extends Model
     public function rhGroup()
     {
         return $this->belongsTo(RhGroup::class);
+    }
+
+    public function bloodBanks()
+    {
+        return $this->hasMany(BloodBank::class);
     }
 }

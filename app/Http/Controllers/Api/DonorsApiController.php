@@ -24,6 +24,20 @@ class DonorsApiController extends Controller
     }
 
     /**
+     * Donors history
+     */
+    public function donorsHistory()
+    {   
+        $donor = Donor::orderBy('id','desc')
+        ->where('user_id', Auth::user()->id)
+        ->with('bloodBanks','bloodBanks.event')
+        ->first();
+
+        return $donor;
+
+    }
+
+    /**
      * Show own create donors profile
      */
     public function donorRequests()

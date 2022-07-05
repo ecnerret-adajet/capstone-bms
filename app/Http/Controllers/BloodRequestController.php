@@ -69,6 +69,8 @@ class BloodRequestController extends Controller
         $bloodRequest->hospital()->associate(Request::get('hospital_id'));
         
         $bloodRequest->urgencyType()->associate(Request::get('urgency_id'));
+
+        $bloodRequest->event()->associate(Request::get('event_id'));
         
         $bloodRequest->save();
 

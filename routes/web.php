@@ -81,6 +81,10 @@ Route::get('/donors/profile', [DonorsController::class, 'donor'])
     ->name('donors.profile')
     ->middleware('auth');
 
+Route::get('/donors/history', [DonorsController::class, 'history'])
+    ->name('donors.history')
+    ->middleware('auth');
+
 Route::get('/donors/create', [DonorsController::class, 'create'])
     ->name('donors.create')
     ->middleware('auth');

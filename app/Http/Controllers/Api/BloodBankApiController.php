@@ -60,6 +60,10 @@ class BloodBankApiController extends Controller
 
         $bloodBank->bloodType()->associate(Request::get('blood_type_id'));
 
+        $bloodBank->event()->associate(Request::get('event_id'));
+
+        $bloodBank->donor()->associate(Request::get('donor_id'));
+
         $bloodBank->save();
 
         // check if has blood type on summary

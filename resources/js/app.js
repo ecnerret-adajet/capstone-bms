@@ -38,6 +38,7 @@ Vue.component('bloodrequest-edit', require('./components/bloodrequest/Edit.vue')
 // donor
 Vue.component('donor-index', require('./components/donor/Index.vue').default);
 Vue.component('donor-profile', require('./components/donor/Profile.vue').default);
+Vue.component('donor-history', require('./components/donor/History.vue').default);
 Vue.component('donor-create', require('./components/donor/Create.vue').default);
 Vue.component('donor-edit', require('./components/donor/Edit.vue').default);
 

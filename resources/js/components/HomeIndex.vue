@@ -65,9 +65,102 @@
                 </div>
               </div>
             </div>
-           
-           
           </div>
+
+          <!-- Card stats -->
+          <div class="row">
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">A+</h5>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.a_pos }}</span>
+                    </div>
+                    <div class="col">
+                       <h5 class="card-title text-uppercase text-muted mb-0">A-</h5>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.a_neg }}</span>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span> -->
+                    <span class="text-nowrap">Since last month</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">B+</h5>
+                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.b_pos }}</span>
+                    </div>
+                    <div class="col">
+                       <h5 class="card-title text-uppercase text-muted mb-0">B-</h5>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.b_neg }}</span>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span> -->
+                    <span class="text-nowrap">Since last month</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">AB+</h5>
+                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.ab_pos }}</span>
+                    </div>
+                    <div class="col">
+                       <h5 class="card-title text-uppercase text-muted mb-0">AB-</h5>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.ab_neg }}</span>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span> -->
+                    <span class="text-nowrap">Since last month</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">O+</h5>
+                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.o_pos }}</span>
+                    </div>
+                    <div class="col">
+                       <h5 class="card-title text-uppercase text-muted mb-0">O-</h5>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.o_neg }}</span>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span> -->
+                    <span class="text-nowrap">Since last month</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+
+          </div>
+
+
         </div>
       </div>
     </div>
@@ -94,6 +187,12 @@ export default {
         totalApprovedBags: 0,
         totalApprovedRequests: 0,
         totalPending: 0,
+        bloodTypeCount: {
+            a: 0,
+            b: 0,
+            ab: 0,
+            o: 0,
+        },
       }
     },
 
@@ -101,9 +200,16 @@ export default {
         this.getApprovedBags()
         this.getApprovedRequests()
         this.getTotalPending()
+        this.fetchBloodTypeCount()
     },
 
     methods: {
+      fetchBloodTypeCount() {
+          axios.get('/api/blood-banks/count')
+              .then(response => {
+                  this.bloodTypeCount = response.data;
+              })
+      },
       getApprovedBags() {
             axios.get('/api/blood-requests/total-approved')
                 .then(response => {

@@ -37,6 +37,7 @@ class EventApiController extends Controller
         $event = new Event;
         $event->title = Request::get('title');
         $event->description = Request::get('description');
+        $event->location = Request::get('location');
         $event->start_date = Request::get('start_date');
         $event->end_date = Request::get('end_date');
         $event->save();

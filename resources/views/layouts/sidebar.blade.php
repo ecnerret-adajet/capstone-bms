@@ -37,7 +37,7 @@
             </li>
             @endrole
       
-            @role('administrator')
+            @role('administrator|personnel')
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/blood-banks') }}">
                 <i class="ni ni-app  text-red"></i>
@@ -68,6 +68,12 @@
               <a class="nav-link" href="{{ url('/donors/profile') }}">
                 <i class="ni ni-circle-08  text-blue"></i>
                 <span class="nav-link-text">Donor Profile</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/donors/history') }}">
+                <i class="ni ni-circle-08  text-blue"></i>
+                <span class="nav-link-text">Donor History</span>
               </a>
             </li>
             @endlevel

@@ -43,6 +43,16 @@
 
                                     <div class="row">
                                         <div class="col">
+                                            <div class="form-group">
+                                            <label class="form-control-label">Location</label>
+                                            <input type="text" id="input-username" class="form-control form-control-alternative" v-model="event.location">
+                                            <span class="text-danger" v-if="errors.location">{{ errors.location[0] }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
                                            <div class="form-group">
                                                 <label class="form-control-label" for="input-username">Start date</label>
                                                 <input type="date" id="input-username" class="form-control form-control-alternative" v-model="event.start_date">
@@ -93,6 +103,7 @@ export default {
                 descripton: '',
                 start_date: '',
                 end_date: '',
+                location: '',
             },
             roles: [],
         }

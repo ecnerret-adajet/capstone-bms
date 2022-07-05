@@ -76,6 +76,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 
     // Donors 
     Route::get('/donors', [DonorsApiController::class, 'index']);
+    Route::get('/donors-history', [DonorsApiController::class, 'donorsHistory']);
     Route::get('/donors-profile', [DonorsApiController::class, 'donorProfile']);
     Route::post('/donors', [DonorsApiController::class, 'store']);
     Route::get('/donors/{donor}', [DonorsApiController::class, 'show']);

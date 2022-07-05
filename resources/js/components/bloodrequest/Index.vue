@@ -114,7 +114,7 @@
                                         </td> -->
                                         <td>{{ request.patient_name }}</td>
                                         <td>{{ request.diagnosies }}</td>
-                                        <td>{{ request.bag_quantity }}</td>
+                                        <td>{{ request.bag_quantity }} Bag(s)</td>
                                         <td>{{ request.hospital ? request.hospital.hospital_name : 'N/A' }}</td>
                                         <td>{{ request.hospital ? request.bloodType.name : 'N/A' }}</td>
                                         <td>{{ request.purpose ? request.purpose.name : 'N/A' }}</td>
