@@ -71,6 +71,57 @@
 
                                 </div>
 
+                                     <hr/>
+
+                                <div class="pl-lg-4">
+                                    <h6 class="heading-small text-muted mb-4">Event User</h6>
+
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-username">Representative Name</label>
+                                                <input type="text" id="input-username" placeholder="Enter Representataive Name" class="form-control form-control-alternative" v-model="event.representative_name">
+                                                <span class="text-danger" v-if="errors.representative_name">{{ errors.representative_name[0] }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-username">Email</label>
+                                                <input type="text" id="input-username" placeholder="Enter Email" class="form-control form-control-alternative" v-model="event.email">
+                                                <span class="text-danger" v-if="errors.email">{{ errors.email[0] }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="row">
+                                        <div class="col-lg">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="role">Role</label>
+                                                <select class="form-control" v-model="event.role_id">
+                                                    <option value="">Select Role</option>
+                                                    <option v-for="(role,g) in roles" v-bind:key="g" :value="role.id"> {{ role.name }}</option>
+                                                </select>
+                                                <span class="text-danger" v-if="errors.role_id  ">{{ errors.role_id[0] }}</span>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-username">Password</label>
+                                                <input type="password" id="input-username" placeholder="Enter Password" class="form-control form-control-alternative" v-model="event.password">
+                                                <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="text">
@@ -104,6 +155,9 @@ export default {
                 start_date: '',
                 end_date: '',
                 location: '',
+                email: '',
+                password: '',
+                representative_name: '',
             },
             roles: [],
         }

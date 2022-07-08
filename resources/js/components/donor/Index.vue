@@ -31,6 +31,8 @@
                                     <th scope="col">Phone Number</th>
                                     <th scope="col">Gender</th>
                                     <th scope="col">Blood type</th>
+                                    <th scope="col">Height</th>
+                                    <th scope="col">Weight</th>
                                     <th scope="col">address</th>
                                     <th scope="col">RH Group</th>
                                     <th scope="col"  v-if="isAuthorized(1)"></th>
@@ -60,6 +62,8 @@
                                         <td>{{ donor.phone_number }}</td>
                                         <td>{{ donor.gender ? donor.gender.name : 'N/A' }}</td>
                                         <td>{{ donor.bloodType ? donor.bloodType.name : 'N/A' }}</td>
+                                        <td>{{ donor.height }} cm</td>
+                                        <td>{{ donor.weight }} kg</td>
                                         <td>{{ donor.address }}</td>
                                         <td>{{ donor.rhGroup ? donor.rhGroup.name : 'N/A' }}</td>
                                         <td  v-if="isAuthorized(1)">

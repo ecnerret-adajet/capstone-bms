@@ -148,7 +148,7 @@
                                             </div>
                                         </td> -->
                                         <td>{{ bloodbank.blood_type ? bloodbank.blood_type.name : 'N/A' }}</td>
-                                        <td>{{ bloodbank.quantity }}</td>
+                                        <td>{{ bloodbank.quantity }} (Bag)</td>
                                         <td>{{ bloodbank.remarks }}</td>
                                         <!-- <td>{{ request.created_at }}</td>
                                         <td>{{ request.updated_at }}</td> -->

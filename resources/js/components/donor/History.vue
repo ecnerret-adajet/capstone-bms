@@ -32,12 +32,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-if="donors.length === 0">
+                                    <!-- <tr v-if="donors.bloodbanks.length === 0">
                                         <td colspan="3">
                                         <h3 class="text-muted text-center pt-3 pb-3">No Data</h3>
                                         </td>
-                                    </tr>
-                                    <tr v-else v-for="(history, a) in donor.bloodbanks" v-bind:key="a">
+                                    </tr> -->
+                                    <tr v-for="(history, a) in donor.blood_banks" v-bind:key="a">
                                         <!-- <td class="text-right">
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
@@ -50,7 +50,7 @@
                                                 </div>
                                             </div>
                                         </td> -->
-                                        <td>{{ history.event.name }}</td>
+                                        <td>{{ history.event.title }}</td>
                                         <td>{{ history.quantity }} bag(s) </td>
                                         <td>{{ history.remarks }}</td>
                                         <!-- <td>{{ request.created_at }}</td>
@@ -110,7 +110,8 @@ export default {
         getDonorHistory() {
             axios.get('/api/donors-history')
                 .then(response => {
-                    this.donor = response.data.data;
+                    this.donor = response.data;
+                    console.log('check donors data: ', response.data)
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;

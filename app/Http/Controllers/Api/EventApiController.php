@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Event;
+use App\Models\User;
 
 class EventApiController extends Controller
 {
@@ -33,6 +34,14 @@ class EventApiController extends Controller
             'title' => ['required'],
             'description' => ['required'],
         ]);
+
+        $user = User::create([
+            'name' =>  Request::get('representative_name'),
+            'email' => Request::get('email'),
+            'password' => bcrypt(Request::get('password')),
+        ]);
+
+        $user->syncRoles(7); // pernsonnel role
 
         $event = new Event;
         $event->title = Request::get('title');
