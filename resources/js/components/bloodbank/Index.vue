@@ -14,11 +14,11 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">A+</h5>
-                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.a_pos }}</span>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.a_pos }} Bag(s)</span>
                     </div>
                     <div class="col">
                        <h5 class="card-title text-uppercase text-muted mb-0">A-</h5>
-                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.a_neg }}</span>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.a_neg }} Bag(s)</span>
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-sm">
@@ -36,11 +36,11 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">B+</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.b_pos }}</span>
+                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.b_pos }} Bag(s)</span>
                     </div>
                     <div class="col">
                        <h5 class="card-title text-uppercase text-muted mb-0">B-</h5>
-                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.b_neg }}</span>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.b_neg }} Bag(s)</span>
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-sm">
@@ -58,11 +58,11 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">AB+</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.ab_pos }}</span>
+                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.ab_pos }} Bag(s)</span>
                     </div>
                     <div class="col">
                        <h5 class="card-title text-uppercase text-muted mb-0">AB-</h5>
-                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.ab_neg }}</span>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.ab_neg }} Bag(s)</span>
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-sm">
@@ -80,11 +80,11 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">O+</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.o_pos }}</span>
+                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.o_pos }} Bag(s)</span>
                     </div>
                     <div class="col">
                        <h5 class="card-title text-uppercase text-muted mb-0">O-</h5>
-                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.o_neg }}</span>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.o_neg }} Bag(s)</span>
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-sm">
@@ -126,6 +126,8 @@
                                     <th scope="col">Blood Type</th>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Expiration Date</th>
+                                    <th scope="col">Donor</th>
+                                    <th scope="col">Event</th>
                                     <th scope="col">Remarks</th>
                                 </tr>
                                 </thead>
@@ -151,6 +153,8 @@
                                         <td>{{ bloodbank.blood_type ? bloodbank.blood_type.name : 'N/A' }}</td>
                                         <td>{{ bloodbank.quantity }} (Bag)</td>
                                         <td>{{ bloodbank.expiration_date }}</td>
+                                        <td>{{ bloodbank.donor ? bloodbank.donor.first_name : '' }} {{  bloodbank.donor ? bloodbank.donor.last_name : '' }}</td>
+                                        <td>{{ bloodbank.event ? bloodbank.event.title : '' }}</td>
                                         <td>{{ bloodbank.remarks }}</td>
                                         <!-- <td>{{ request.created_at }}</td>
                                         <td>{{ request.updated_at }}</td> -->

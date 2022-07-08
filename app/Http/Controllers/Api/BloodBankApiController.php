@@ -20,7 +20,7 @@ class BloodBankApiController extends Controller
     public function index()
     {
         $bloodBanks = BloodBank::orderBy('id','desc')
-                    ->with('bloodType')    
+                    ->with('bloodType','donor','event')    
                     ->get();
                     
         return $bloodBanks;
