@@ -74,6 +74,16 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group">
+                                                <label class="form-control-label" for="input-username">Expiration Date</label>
+                                                <input type="date" id="input-username" class="form-control form-control-alternative" v-model="bloodbank.expiration_date">
+                                                <span class="text-danger" v-if="errors.expiration_date">{{ errors.expiration_date[0] }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
                                                 <label class="form-control-label" for="input-username">Remarks</label>
                                                 <input type="text" id="input-username" placeholder="Enter Name" class="form-control form-control-alternative" v-model="bloodbank.remarks">
                                                 <span class="text-danger" v-if="errors.remarks">{{ errors.remarks[0] }}</span>
@@ -116,6 +126,7 @@ export default {
             bloodbank:{
                 quantity: '',
                 blood_type_id: '',
+                expiration_date: '',
                 remarks: '',
             },
             bloodtypes: [],

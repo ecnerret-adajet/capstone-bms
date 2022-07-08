@@ -125,6 +125,7 @@
                                 <tr>
                                     <th scope="col">Blood Type</th>
                                     <th scope="col">Quantity</th>
+                                    <th scope="col">Expiration Date</th>
                                     <th scope="col">Remarks</th>
                                 </tr>
                                 </thead>
@@ -149,6 +150,7 @@
                                         </td> -->
                                         <td>{{ bloodbank.blood_type ? bloodbank.blood_type.name : 'N/A' }}</td>
                                         <td>{{ bloodbank.quantity }} (Bag)</td>
+                                        <td>{{ bloodbank.expiration_date }}</td>
                                         <td>{{ bloodbank.remarks }}</td>
                                         <!-- <td>{{ request.created_at }}</td>
                                         <td>{{ request.updated_at }}</td> -->
