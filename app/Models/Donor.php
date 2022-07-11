@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Donor extends Model
 {
@@ -19,6 +20,16 @@ class Donor extends Model
         'user_id',
         'donor_history',
     ];
+
+    public function getDateOfDonationAttribute()
+    {
+        return Carbon::parse($this->created_at)->format('Y-m-d');
+    }
+
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->birthdate)->diff(Carbon::now())->y;
+    }
 
     public function user()
     {

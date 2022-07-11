@@ -26,8 +26,9 @@
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                 <tr>
+                                    <th scope="col">Date of Donation</th>
                                     <th scope="col">Event Name</th>
-                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Blood Quantity</th>
                                     <th scope="col">Remarks</th>
                                 </tr>
                                 </thead>
@@ -50,6 +51,7 @@
                                                 </div>
                                             </div>
                                         </td> -->
+                                        <td>{{ history.date_of_donation }}</td>
                                         <td>{{ history.event.title }}</td>
                                         <td>{{ history.quantity }} bag(s) </td>
                                         <td>{{ history.remarks }}</td>

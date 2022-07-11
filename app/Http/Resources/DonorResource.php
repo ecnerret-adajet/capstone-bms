@@ -24,6 +24,7 @@ class DonorResource extends JsonResource
             'phone_number' => $this->phone_number,
             'gender' => $this->gender,
             'birthdate' => $this->birthdate,
+            'age' => $this->age,
             'address' => $this->address,
             'height' => $this->height,
             'weight' => $this->weight,

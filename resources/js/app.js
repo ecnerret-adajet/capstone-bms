@@ -49,12 +49,15 @@ Vue.component('hospital-edit', require('./components/hospital/Edit.vue').default
 Vue.component('hospital-profile', require('./components/hospital/Profile.vue').default);
 
 //events
+Vue.component('event-current', require('./components/events/CurrentEvent.vue').default);
 Vue.component('event-index', require('./components/events/Index.vue').default);
 Vue.component('event-create', require('./components/events/Create.vue').default);
 
 //user
 Vue.component('user-index', require('./components/user/Index.vue').default);
 Vue.component('user-create', require('./components/user/Create.vue').default);
+
+// current event
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

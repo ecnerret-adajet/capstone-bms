@@ -53,6 +53,32 @@
                                     <label
                                         class="form-control-label"
                                         for="input-username"
+                                        >Email</label
+                                    >
+                                    <input
+                                        disabled
+                                        type="email"
+                                        id="input-username"
+                                        placeholder="Enter Password"
+                                        class="form-control form-control-alternative"
+                                        v-model="donor.email"
+                                    />
+                                    <span
+                                        class="text-danger"
+                                        v-if="errors.email"
+                                        >{{
+                                            errors.email[0]
+                                        }}</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label
+                                        class="form-control-label"
+                                        for="input-username"
                                         >Password</label
                                     >
                                     <input
@@ -73,31 +99,38 @@
                             </div>
                         </div>
                         <div class="row">
-                        <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label" for="input-first-name">Gender</label>
-                            <select class="form-control" v-model="donor.gender_id">
-                                <option v-for="(gender,g) in genders" v-bind:key="g" :value="gender.id"> {{ gender.name }}</option>
-                            </select>
-                            <!-- <label class="form-control-label" for="input-first-name">Phone Number</label>
-                            <input type="number" id="input-username" class="form-control form-control-alternative" v-model="donor.phone_number"> -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label" for="input-first-name">Gender</label>
+                                <select class="form-control" v-model="donor.gender_id">
+                                    <option v-for="(gender,g) in genders" v-bind:key="g" :value="gender.id"> {{ gender.name }}</option>
+                                </select>
+                                <!-- <label class="form-control-label" for="input-first-name">Phone Number</label>
+                                <input type="number" id="input-username" class="form-control form-control-alternative" v-model="donor.phone_number"> -->
 
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label" for="input-last-name">Birthdate</label>
+                                <input type="date" id="input-username" class="form-control form-control-alternative" v-model="donor.birthdate">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label" for="input-last-name">Age</label>
+                                <input type="tex" id="input-username" class="form-control form-control-alternative" v-model="donor.birthdate">
+                            </div>
                         </div>
                         </div>
-                        <div class="col-lg-6">
-                        <div class="form-group">
-                        <label class="form-control-label" for="input-last-name">Birthdate</label>
-                        <input type="date" id="input-username" class="form-control form-control-alternative" v-model="donor.birthdate">
                         </div>
-                        </div>
-                        </div>
-                        </div>
+
                         <div class="pl-lg-4">
                        
                         <div class="row">
                         <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="input-first-name">Height</label>
+                            <label class="form-control-label" for="input-first-name">Height (cm)</label>
                             <input type="text" id="input-username" class="form-control form-control-alternative" v-model="donor.height">
                             <!-- <label class="form-control-label" for="input-first-name">Phone Number</label>
                             <input type="number" id="input-username" class="form-control form-control-alternative" v-model="donor.phone_number"> -->
@@ -106,7 +139,7 @@
                         </div>
                         <div class="col-lg-6">
                         <div class="form-group">
-                        <label class="form-control-label" for="input-last-name">Weight</label>
+                        <label class="form-control-label" for="input-last-name">Weight (kg)</label>
                         <input type="text" id="input-username" class="form-control form-control-alternative" v-model="donor.weight">
                         </div>
                         </div>

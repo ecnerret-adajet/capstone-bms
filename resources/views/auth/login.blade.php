@@ -16,6 +16,15 @@
     <!-- Page content -->
     <div class="container mt--8 pb-5">
         <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-4">
+            {{-- current event --}}
+
+                {{-- <event-current><event-current> --}}
+
+                <h1 class="text-white">{{ $event->title }}</h1>
+                <h3 class="text-white"> {{ $event->description }} </h3>
+
+            </div>
             <div class="col-lg-5 col-md-7">
                 <div class="card bg-secondary shadow border-0">
                     <div class="card-header bg-transparent pb-5">

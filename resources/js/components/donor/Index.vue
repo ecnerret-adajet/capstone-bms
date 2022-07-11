@@ -31,10 +31,12 @@
                                     <th scope="col">Phone Number</th>
                                     <th scope="col">Gender</th>
                                     <th scope="col">Blood type</th>
+                                    <th scope="col">Age</th>
                                     <th scope="col">Height</th>
                                     <th scope="col">Weight</th>
                                     <th scope="col">address</th>
                                     <th scope="col">RH Group</th>
+                                    <th scope="col">Email</th>
                                     <th scope="col"  v-if="isAuthorized(1)"></th>
                                 </tr>
                                 </thead>
@@ -62,6 +64,7 @@
                                         <td>{{ donor.phone_number }}</td>
                                         <td>{{ donor.gender ? donor.gender.name : 'N/A' }}</td>
                                         <td>{{ donor.bloodType ? donor.bloodType.name : 'N/A' }}</td>
+                                        <td>{{ donor.age }} cm</td>
                                         <td>{{ donor.height }} cm</td>
                                         <td>{{ donor.weight }} kg</td>
                                         <td>{{ donor.address }}</td>
@@ -70,6 +73,7 @@
                                              <a :href="`/donors/edit/${donor.id }`" class="btn btn-primary btn-sm"> Edit </a>
                                             <button @click="deleteItem(donor.id)" class="btn btn-danger btn-sm"> Delete </button>
                                         </td>
+                                        <td>{{ donor.use.email }}</td>
                                         <!-- <td>{{ request.created_at }}</td>
                                         <td>{{ request.updated_at }}</td> -->
                                     </tr>

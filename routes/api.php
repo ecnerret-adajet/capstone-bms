@@ -29,6 +29,8 @@ use App\Http\Controllers\Api\EventApiController;
 //     return $request->user();
 // });
 
+Route::get('/current-event', [EventApiController::class, 'currentEvent']);
+
 Route::group(['middleware' => 'auth:api'], function() {
 
     //Blood Requests

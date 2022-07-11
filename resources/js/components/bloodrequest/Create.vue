@@ -38,7 +38,7 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-username">Bag Quantiy</label>
+                                                <label class="form-control-label" for="input-username">Quantity(bag)</label>
                                                 <input type="number" id="input-username" class="form-control form-control-alternative" v-model="bloodrequest.bag_quantity">
                                                 <!-- <span class="text-danger" v-if="errors.patient_name">{{ errors.patient_name[0] }}</span> -->
                                             </div>

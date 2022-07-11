@@ -91,14 +91,14 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-username">Height</label>
+                                                <label class="form-control-label" for="input-username">Height (cm)</label>
                                                 <input type="text" id="input-username" class="form-control form-control-alternative" v-model="donor.height">
                                                 <!-- <span class="text-danger" v-if="errors.first_name">{{ errors.first_name[0] }}</span> -->
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-username">Weight</label>
+                                                <label class="form-control-label" for="input-username">Weight (kg)</label>
                                                 <input type="text" id="input-username" class="form-control form-control-alternative" v-model="donor.weight">
                                                 <!-- <span class="text-danger" v-if="errors.patient_name">{{ errors.patient_name[0] }}</span> -->
                                             </div>

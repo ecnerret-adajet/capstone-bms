@@ -11,6 +11,16 @@ use App\Models\User;
 
 class EventApiController extends Controller
 {
+
+    /**
+     * Current event
+     */
+    public function currentEvent()
+    {
+        $event = Event::orderBy('id','desc')->first();
+        return $event;
+    }
+
     /**
      * Display a listing of the resource.
      *
