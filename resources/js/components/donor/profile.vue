@@ -119,7 +119,7 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-last-name">Age</label>
-                                <input type="tex" id="input-username" class="form-control form-control-alternative" v-model="donor.birthdate">
+                                <input type="text" id="input-username" class="form-control form-control-alternative" v-model="donor.age">
                             </div>
                         </div>
                         </div>
