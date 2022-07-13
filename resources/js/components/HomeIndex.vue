@@ -76,11 +76,11 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">A+</h5>
-                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.a_pos }}</span>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.a_pos }} Bag(s)</span>
                     </div>
                     <div class="col">
                        <h5 class="card-title text-uppercase text-muted mb-0">A-</h5>
-                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.a_neg }}</span>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.a_neg }} Bag(s)</span>
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-sm">
@@ -98,11 +98,11 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">B+</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.b_pos }}</span>
+                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.b_pos }} Bag(s)</span>
                     </div>
                     <div class="col">
                        <h5 class="card-title text-uppercase text-muted mb-0">B-</h5>
-                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.b_neg }}</span>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.b_neg }} Bag(s)</span>
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-sm">
@@ -120,11 +120,11 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">AB+</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.ab_pos }}</span>
+                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.ab_pos }} Bag(s)</span>
                     </div>
                     <div class="col">
                        <h5 class="card-title text-uppercase text-muted mb-0">AB-</h5>
-                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.ab_neg }}</span>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.ab_neg }} Bag(s)</span>
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-sm">
@@ -142,11 +142,11 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">O+</h5>
-                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.o_pos }}</span>
+                      <span class="h2 font-weight-bold mb-0">{{ bloodTypeCount.o_pos }} Bag(s)</span>
                     </div>
                     <div class="col">
                        <h5 class="card-title text-uppercase text-muted mb-0">O-</h5>
-                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.o_neg }}</span>
+                      <span class="h1 font-weight-bold mb-0">{{ bloodTypeCount.o_neg }} Bag(s)</span>
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-sm">
