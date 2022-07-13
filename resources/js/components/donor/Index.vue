@@ -98,7 +98,7 @@
                                                     : "N/A"
                                             }}
                                         </td>
-                                        <td>{{ donor.age }} cm</td>
+                                        <td>{{ donor.age }}</td>
                                         <td>{{ donor.height }} cm</td>
                                         <td>{{ donor.weight }} kg</td>
                                         <td>{{ donor.address }}</td>
