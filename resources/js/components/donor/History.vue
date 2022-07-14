@@ -51,7 +51,7 @@
                                                 </div>
                                             </div>
                                         </td> -->
-                                        <td>{{ history.created_at }}</td>
+                                        <td>{{ dateMoment(history.created_at) }}</td>
                                         <td>{{ history.event.title }}</td>
                                         <td>{{ history.quantity }} bag(s) </td>
                                         <td>{{ history.remarks }}</td>
@@ -84,6 +84,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 export default {
 
     props:['roles'],
@@ -109,6 +110,11 @@ export default {
     },
 
     methods: {
+
+        dateMoment(value) {
+            return moment(String(value)).format('MM/DD/YYYY');
+        },
+
         getDonorHistory() {
             axios.get('/api/donors-history')
                 .then(response => {

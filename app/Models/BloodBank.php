@@ -17,11 +17,6 @@ class BloodBank extends Model
         'expiration_date',
     ];
 
-    public function getCreatedAtAttribute($value)
-    {
-        return Verta($value)->format('%d %B %Y');
-    }
-
     public function bloodType()
     {
         return $this->belongsTo(BloodType::class);
