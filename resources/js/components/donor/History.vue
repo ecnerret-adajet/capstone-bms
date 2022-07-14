@@ -51,7 +51,7 @@
                                                 </div>
                                             </div>
                                         </td> -->
-                                        <td>{{ history.date_of_donation }}</td>
+                                        <td>{{ history.created_at }}</td>
                                         <td>{{ history.event.title }}</td>
                                         <td>{{ history.quantity }} bag(s) </td>
                                         <td>{{ history.remarks }}</td>
