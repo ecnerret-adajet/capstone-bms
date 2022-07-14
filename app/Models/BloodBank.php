@@ -17,6 +17,11 @@ class BloodBank extends Model
         'expiration_date',
     ];
 
+    public function getDateOfDonationAttribute()
+    {
+        return Carbon::parse($this->created_at)->format('Y-m-d');
+    }
+
     public function bloodType()
     {
         return $this->belongsTo(BloodType::class);
