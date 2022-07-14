@@ -17,9 +17,11 @@ class BloodBank extends Model
         'expiration_date',
     ];
 
-    public function setCreatedAtAttribute($value)
+
+    public function getCreatedAtAttribute($value)
     {
-        $this->attributes['created_at'] = Carbon::parse($value)->format('Y-m-d');
+        // return Verta($value)->format('%d %B %Y');
+        return Carbon::parse($value)->format('Y-m-d');
     }
 
     public function getDateOfDonationAttribute()
